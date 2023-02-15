@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addAsyncTextarea } from '../feature/notesSlice';
 
 const NewNotePage = () => {
   const [valueTextarea, setValueTextarea] = useState('');
+  const dispatch = useDispatch();
 
   // option list class
   const optionClass = 'ml-3 transition-all duration-75 ease-in';
@@ -10,6 +13,7 @@ const NewNotePage = () => {
   // send values
   const onSubmit = () => {
     e.preventDefault();
+    dispatch(addAsyncTextarea({ note: valueTextarea }));
     setValueTextarea('');
   };
 
