@@ -1,0 +1,14 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "subject": "todo 1",
+      "textarea": "note 1"
+    },
+    {
+      "id": 2,
+      "subject": "todo 2",
+      "textarea": "note 2"
+    }
+  ]
+}
