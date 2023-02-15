@@ -21,7 +21,7 @@ const NotesListPage = () => {
         <div>
           <ul>
             {notes.map((note) => (
-              <NoteItem id={note.id} {...note} />
+              <NoteItem key={note.id} {...note} />
             ))}
             {/* test */}
             <li className='h-7 w-96 bg-main-grey'>
