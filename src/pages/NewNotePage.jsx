@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addAsyncTextarea } from '../feature/notesSlice';
+import { addAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
 const NewNotePage = () => {
@@ -22,7 +22,7 @@ const NewNotePage = () => {
   const onSubmit = () => {
     e.preventDefault();
     dispatch(
-      addAsyncTextarea({
+      addAsyncNotes({
         subject: noteValues.subject,
         textarea: noteValues.textarea,
       })
