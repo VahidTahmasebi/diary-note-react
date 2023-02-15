@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 const NewNotePage = () => {
+  const [valueTextarea, setValueTextarea] = useState('');
+
+  // option list class
   const optionClass = 'ml-3 transition-all duration-75 ease-in';
+
+  // send values
+  const onSubmit = () => {
+    e.preventDefault();
+    setValueTextarea('');
+  };
+
   return (
     <section className='h-screen flex right-14 flex-col justify-start items-center'>
+      {/* cover */}
       <div className='flex flex-col justify-start items-center relative'>
         <div class='w-screen relative flex justify-center items-start'>
           <div class='h-40 lg:w-4/6 w-full relative bg-main-grey rounded-bl-full rounded-br-full'>
-            <button className='absolute top-2 left-4 py-2 px-4 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'>
+            <button
+              className='absolute top-2 left-4 py-2 px-4 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
+              onSubmit={onSubmit}
+            >
               cover
             </button>
 
@@ -20,6 +33,7 @@ const NewNotePage = () => {
         </div>
       </div>
 
+      {/* tag */}
       <div className='lg:w-1/2 w-80 my-7 flex'>
         <h4 className='mr-3 opacity-70'>tag</h4>
         <div className=''>
@@ -27,6 +41,7 @@ const NewNotePage = () => {
         </div>
       </div>
 
+      {/* main */}
       <div className='w-3/6 flex justify-between'>
         <div className=''>
           <div className='flex flex-col lg:w-96'>
@@ -34,12 +49,16 @@ const NewNotePage = () => {
             <textarea
               className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
               placeholder='your note...'
+              value={valueTextarea}
+              onChange={(e) => setValueTextarea(e.target.value)}
             />
           </div>
           <div>
             <label className='opacity-70'>todo</label>
           </div>
         </div>
+
+        {/* option list */}
         <div>
           <div className='opacity-70'>Add to card</div>
           <ul className='h-96 w-40 flex flex-col justify-around items-start px-5 py-3 bg-main-grey rounded-xl text-main-white'>
@@ -151,19 +170,3 @@ const NewNotePage = () => {
 };
 
 export default NewNotePage;
-
-<svg
-  xmlns='http://www.w3.org/2000/svg'
-  fill='none'
-  viewBox='0 0 24 24'
-  strokeWidth={1.5}
-  stroke='currentColor'
-  className='w-6 h-6'
->
-  <path
-    strokeLinecap='round'
-    strokeLinejoin='round'
-    d='M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z'
-  />
-  <path strokeLinecap='round' strokeLinejoin='round' d='M6 6h.008v.008H6V6z' />
-</svg>;
