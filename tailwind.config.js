@@ -15,6 +15,9 @@ module.exports = {
         'mein-orange': 'var(--mein-orange)',
         'body-color': 'var(--body-color)',
       },
+      minHeight: (theme) => ({
+        ...theme('spacing'),
+      }),
     },
   },
   plugins: [],
