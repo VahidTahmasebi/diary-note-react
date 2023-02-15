@@ -5,17 +5,24 @@ import { addAsyncTextarea } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
 const NewNotePage = () => {
-  const [valueTextarea, setValueTextarea] = useState('');
+  const [noteValues, setNoteValues] = useState({
+    textarea: '',
+    subject: '',
+  });
   const dispatch = useDispatch();
 
   // option list className
   const optionClass = 'ml-3 transition-all duration-75 ease-in';
 
+  const changeHandler = ({ target }) => {
+    setNoteValues({ ...noteValues, [target.name]: target.value });
+  };
+
   // send values
   const onSubmit = () => {
     e.preventDefault();
-    dispatch(addAsyncTextarea({ note: valueTextarea }));
-    setValueTextarea('');
+    dispatch(addAsyncTextarea({ note: noteValues.textarea }));
+    valuesNote({ subject: '', textarea: '' });
   };
 
   return (
@@ -33,12 +40,27 @@ const NewNotePage = () => {
         <div className='w-3/6 flex justify-between'>
           <div className=''>
             <div className='flex flex-col lg:w-96'>
+              <label htmlFor='subject' className='opacity-70'>
+                subject
+              </label>
+              <input
+                type='subject'
+                id='subject'
+                name='subject'
+                value={noteValues.subject}
+                onChange={changeHandler}
+                placeholder='your subject...'
+                className='lg:w-full p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              />
+            </div>
+            <div className='flex flex-col lg:w-96'>
               <label className='opacity-70'>note</label>
               <textarea
                 className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                 placeholder='your note...'
-                value={valueTextarea}
-                onChange={(e) => setValueTextarea(e.target.value)}
+                value={noteValues.textarea}
+                name='textarea'
+                onChange={changeHandler}
               />
             </div>
             <div>
@@ -154,7 +176,8 @@ const NewNotePage = () => {
               </ul>
             </div>
             <div className='text-center'>
-              <Link to="/notes-list"
+              <Link
+                to='/notes-list'
                 onSubmit={onSubmit}
                 className=' py-2 px-4 my-52 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
               >
