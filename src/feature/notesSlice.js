@@ -8,7 +8,8 @@ export const addAsyncTextarea = createAsyncThunk(
     try {
       const response = await axios.post('http://localhost:8080/notes', {
         id: Date.now(),
-        note: payload.note,
+        subject: payload.subject,
+        textarea: payload.textarea,
       });
       return response.data;
     } catch (error) {

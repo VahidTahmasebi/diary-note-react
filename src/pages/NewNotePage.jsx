@@ -6,8 +6,8 @@ import Layout from '../Layout/Layout';
 
 const NewNotePage = () => {
   const [noteValues, setNoteValues] = useState({
-    textarea: '',
     subject: '',
+    textarea: '',
   });
   const dispatch = useDispatch();
 
@@ -21,7 +21,12 @@ const NewNotePage = () => {
   // send values
   const onSubmit = () => {
     e.preventDefault();
-    dispatch(addAsyncTextarea({ note: noteValues.textarea }));
+    dispatch(
+      addAsyncTextarea({
+        subject: noteValues.subject,
+        textarea: noteValues.textarea,
+      })
+    );
     valuesNote({ subject: '', textarea: '' });
   };
 
