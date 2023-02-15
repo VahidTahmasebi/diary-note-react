@@ -154,7 +154,7 @@ const NewNotePage = () => {
               </ul>
             </div>
             <div className='text-center'>
-              <Link
+              <Link to="/notes-list"
                 onSubmit={onSubmit}
                 className=' py-2 px-4 my-52 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
               >
