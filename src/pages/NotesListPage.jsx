@@ -18,8 +18,8 @@ const NotesListPage = () => {
   return (
     <section className='h-screen flex flex-col justify-start items-center'>
       <Layout>
-        <div>
-          <ul>
+        <div className=' w-screen flex flex-col items-center'>
+          <ul className='my-16 h-96 w-2/6 px-3 overflow-auto'>
             {notes.map((note) => (
               <NoteItem key={note.id} {...note} />
             ))}

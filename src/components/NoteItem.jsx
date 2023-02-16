@@ -1,17 +1,12 @@
-import { useDispatch } from 'react-redux';
-import Layout from '../Layout/Layout';
+import React from 'react';
 
 const NoteItem = ({ subject }) => {
   return (
-    <section className='h-screen flex flex-col justify-start items-center'>
-      <Layout>
-        <li className='h-7 w-1/2 bg-main-grey'>
-          <div>
-            <span>{subject}</span>
-          </div>
-        </li>
-      </Layout>
-    </section>
+    <li className='h-20 w-full py-6 px-5 my-3 bg-main-grey rounded-2xl'>
+      <div className='flex items-center'>
+        <span>{subject}</span>
+      </div>
+    </li>
   );
 };
 
