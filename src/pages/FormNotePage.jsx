@@ -8,12 +8,23 @@ const FormNotePage = () => {
   const [noteValues, setNoteValues] = useState({
     subject: '',
     textarea: '',
+    cover: null,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const changeHandler = ({ target }) => {
     setNoteValues({ ...noteValues, [target.name]: target.value });
+  };
+
+  const coverSelectHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setNoteValues({ cover: reader.result });
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   // send values
@@ -182,13 +193,33 @@ const FormNotePage = () => {
                 </li>
               </ul>
             </div>
+
             <div className='text-center'>
+              <div className='mb-3'>
+                <input
+                  type='file'
+                  accept='image/*'
+                  name='image-upload'
+                  id='file'
+                  onChange={coverSelectHandler}
+                  className='opacity-0 px-0.5 py-0.5 absolute'
+                />
+                <label
+                  for='file'
+                  class='py-2 px-4 mb-2 cursor-pointer rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
+                >
+                  cover
+                </label>
+              </div>
               <button
                 type='submit'
                 className=' py-2 px-4 my-1 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
               >
                 Add note
               </button>
+              <div>
+                <img src={noteValues.cover} alt='' id='img' />
+              </div>
             </div>
           </div>
         </form>
