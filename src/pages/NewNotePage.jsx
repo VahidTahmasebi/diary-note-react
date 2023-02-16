@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
@@ -10,16 +10,17 @@ const NewNotePage = () => {
     textarea: '',
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // option list className
   const optionClass = 'ml-3 transition-all duration-75 ease-in';
 
-  const changeHandler = ({ target }) => {
+  const changeHandler = ({target}) => {
     setNoteValues({ ...noteValues, [target.name]: target.value });
   };
 
   // send values
-  const onSubmit = () => {
+  const onSubmit = (e) => {
     e.preventDefault();
     dispatch(
       addAsyncNotes({
@@ -27,7 +28,8 @@ const NewNotePage = () => {
         textarea: noteValues.textarea,
       })
     );
-    valuesNote({ subject: '', textarea: '' });
+    setNoteValues({ subject: '', textarea: '' });
+    navigate('/notes-list');
   };
 
   return (
@@ -42,8 +44,8 @@ const NewNotePage = () => {
         </div>
 
         {/* main */}
-        <div className='w-3/6 flex justify-between'>
-          <div className=''>
+        <form onSubmit={onSubmit} className='w-3/6 flex justify-between'>
+          <div>
             <div className='flex flex-col lg:w-96'>
               <label htmlFor='subject' className='opacity-70'>
                 subject
@@ -181,16 +183,15 @@ const NewNotePage = () => {
               </ul>
             </div>
             <div className='text-center'>
-              <Link
-                to='/notes-list'
-                onSubmit={onSubmit}
-                className=' py-2 px-4 my-52 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
+              <button
+                type='submit'
+                className=' py-2 px-4 my-1 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
               >
                 Add note
-              </Link>
+              </button>
             </div>
           </div>
-        </div>
+        </form>
       </Layout>
     </section>
   );

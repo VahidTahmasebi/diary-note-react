@@ -23,12 +23,6 @@ const NotesListPage = () => {
             {notes.map((note) => (
               <NoteItem key={note.id} {...note} />
             ))}
-            {/* test */}
-            <li className='h-7 w-96 bg-main-grey'>
-              <div>
-                <span>123</span>
-              </div>
-            </li>
           </ul>
         </div>
       </Layout>
