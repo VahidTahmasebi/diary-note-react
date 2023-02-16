@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { addAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
-const NewNotePage = () => {
+const FormNotePage = () => {
   const [noteValues, setNoteValues] = useState({
     subject: '',
     textarea: '',
@@ -12,10 +12,7 @@ const NewNotePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // option list className
-  const optionClass = 'ml-3 transition-all duration-75 ease-in';
-
-  const changeHandler = ({target}) => {
+  const changeHandler = ({ target }) => {
     setNoteValues({ ...noteValues, [target.name]: target.value });
   };
 
@@ -31,6 +28,9 @@ const NewNotePage = () => {
     setNoteValues({ subject: '', textarea: '' });
     navigate('/notes-list');
   };
+
+  // option list className
+  const optionClass = 'ml-3 transition-all duration-75 ease-in';
 
   return (
     <section className='h-screen flex flex-col justify-start items-center'>
@@ -197,4 +197,4 @@ const NewNotePage = () => {
   );
 };
 
-export default NewNotePage;
+export default FormNotePage;
