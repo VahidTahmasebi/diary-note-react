@@ -34,9 +34,10 @@ const FormNotePage = () => {
       addAsyncNotes({
         subject: noteValues.subject,
         textarea: noteValues.textarea,
+        cover: noteValues.cover,
       })
     );
-    setNoteValues({ subject: '', textarea: '' });
+    setNoteValues({ subject: '', textarea: '', cover: null });
     navigate('/notes-list');
   };
 
@@ -112,7 +113,7 @@ const FormNotePage = () => {
                     />
                   </svg>
 
-                  <button className={optionClass}>labels</button>
+                  <a className={optionClass}>labels</a>
                 </li>
                 <li className='flex'>
                   <svg
@@ -130,7 +131,7 @@ const FormNotePage = () => {
                     />
                   </svg>
 
-                  <button className={optionClass}>dates</button>
+                  <a className={optionClass}>dates</a>
                 </li>
                 <li className='flex'>
                   <svg
@@ -148,7 +149,7 @@ const FormNotePage = () => {
                     />
                   </svg>
 
-                  <button className={optionClass}>alarm clock</button>
+                  <a className={optionClass}>alarm clock</a>
                 </li>
                 <li className='flex'>
                   <svg
@@ -171,7 +172,7 @@ const FormNotePage = () => {
                     />
                   </svg>
 
-                  <button className={optionClass}>location</button>
+                  <a className={optionClass}>location</a>
                 </li>
                 <li className='flex'>
                   <svg
@@ -189,7 +190,7 @@ const FormNotePage = () => {
                     />
                   </svg>
 
-                  <button className={optionClass}>checklist</button>
+                  <a className={optionClass}>checklist</a>
                 </li>
               </ul>
             </div>
@@ -202,13 +203,13 @@ const FormNotePage = () => {
                   name='image-upload'
                   id='file'
                   onChange={coverSelectHandler}
-                  className='opacity-0 px-0.5 py-0.5 absolute'
+                  className='opacity-0 w-0.5 h-0.5 absolute'
                 />
                 <label
-                  for='file'
-                  class='py-2 px-4 mb-2 cursor-pointer rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
+                  htmlFor='file'
+                  className='py-2 px-4 mb-2 cursor-pointer rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
                 >
-                  cover
+                  Cover
                 </label>
               </div>
               <button
@@ -217,9 +218,6 @@ const FormNotePage = () => {
               >
                 Add note
               </button>
-              <div>
-                <img src={noteValues.cover} alt='' id='img' />
-              </div>
             </div>
           </div>
         </form>
