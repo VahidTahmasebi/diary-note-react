@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import NoteModal from '../components/NoteModal';
 import { addAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
@@ -45,6 +46,7 @@ const FormNotePage = () => {
         cover: noteValues.cover,
         date: noteValues.date,
         time: noteValues.time,
+        locationValue: noteValues.locationValue,
       })
     );
     setNoteValues({ subject: '', textarea: '', cover: null });
@@ -55,29 +57,11 @@ const FormNotePage = () => {
   const optionClass = 'ml-3 transition-all duration-75 ease-in';
   return (
     <section className='h-screen flex flex-col justify-start items-center'>
-      {/* dates module */}
-      {dateModule && (
-        <div
-          onClick={() => setDateModule(false)}
-          className='w-screen h-screen z-50 bg-gray-400 bg-opacity-20 fixed inset-0 flex justify-center items-center'
-        >
-          <div onClick={(e) => e.stopPropagation()}>
-            <input
-              type='date'
-              name='date'
-              onChange={changeHandler}
-              className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
-            />
-            <input
-              type='time'
-              name='time'
-              onChange={changeHandler}
-              className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
-            />
-          </div>
-        </div>
-      )}
-
+      <NoteModal
+        dateModule={dateModule}
+        setDateModule={setDateModule}
+        changeHandler={changeHandler}
+      />
       <Layout>
         {/* tag */}
         <div className='lg:w-1/2 w-80 my-7 flex'>
