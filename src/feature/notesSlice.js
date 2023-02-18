@@ -25,6 +25,7 @@ export const addAsyncNotes = createAsyncThunk(
         cover: payload.cover,
         date: payload.date,
         time: payload.time,
+        locationValue: payload.locationValue,
       });
       return response.data;
     } catch (error) {

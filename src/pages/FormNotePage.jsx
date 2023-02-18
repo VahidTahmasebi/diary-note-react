@@ -12,9 +12,13 @@ const FormNotePage = () => {
     cover: null,
     date: null,
     time: null,
+    location: null,
   });
   // module state
-  const [dateModule, setDateModule] = useState(false);
+  const [modalState, setModalState] = useState({
+    datesModal: false,
+    locationModal: false,
+  });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,10 +50,17 @@ const FormNotePage = () => {
         cover: noteValues.cover,
         date: noteValues.date,
         time: noteValues.time,
-        locationValue: noteValues.locationValue,
+        location: noteValues.location,
       })
     );
-    setNoteValues({ subject: '', textarea: '', cover: null });
+    setNoteValues({
+      subject: '',
+      textarea: '',
+      cover: null,
+      date: null,
+      time: null,
+      location: null,
+    });
     navigate('/notes-list');
   };
 
@@ -58,9 +69,10 @@ const FormNotePage = () => {
   return (
     <section className='h-screen flex flex-col justify-start items-center'>
       <NoteModal
-        dateModule={dateModule}
-        setDateModule={setDateModule}
+        modalState={modalState}
+        setModalState={setModalState}
         changeHandler={changeHandler}
+        noteValues={noteValues}
       />
       <Layout>
         {/* tag */}
@@ -131,7 +143,9 @@ const FormNotePage = () => {
                   <a className={optionClass}>labels</a>
                 </li>
                 <li
-                  onClick={() => setDateModule(true)}
+                  onClick={() =>
+                    setModalState({ ...modalState, datesModal: true })
+                  }
                   className='flex cursor-pointer'
                 >
                   <svg
@@ -151,7 +165,12 @@ const FormNotePage = () => {
 
                   <a className={optionClass}>dates</a>
                 </li>
-                <li className='flex'>
+                <li
+                  onClick={() =>
+                    setModalState({ ...modalState, locationModal: true })
+                  }
+                  className='flex cursor-pointer'
+                >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
