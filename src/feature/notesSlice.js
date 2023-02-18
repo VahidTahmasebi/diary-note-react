@@ -23,6 +23,8 @@ export const addAsyncNotes = createAsyncThunk(
         subject: payload.subject,
         textarea: payload.textarea,
         cover: payload.cover,
+        date: payload.date,
+        time: payload.time,
       });
       return response.data;
     } catch (error) {

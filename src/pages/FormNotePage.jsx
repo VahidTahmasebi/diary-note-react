@@ -9,14 +9,21 @@ const FormNotePage = () => {
     subject: '',
     textarea: '',
     cover: null,
+    date: null,
+    time: null,
   });
+  // module state
+  const [dateModule, setDateModule] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // change form handler
   const changeHandler = ({ target }) => {
+    console.log(target.value);
     setNoteValues({ ...noteValues, [target.name]: target.value });
   };
-
+  // cover handler
   const coverSelectHandler = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
@@ -28,6 +35,7 @@ const FormNotePage = () => {
   };
 
   // send values
+  // move to the note list page
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -35,6 +43,8 @@ const FormNotePage = () => {
         subject: noteValues.subject,
         textarea: noteValues.textarea,
         cover: noteValues.cover,
+        date: noteValues.date,
+        time: noteValues.time,
       })
     );
     setNoteValues({ subject: '', textarea: '', cover: null });
@@ -43,9 +53,31 @@ const FormNotePage = () => {
 
   // option list className
   const optionClass = 'ml-3 transition-all duration-75 ease-in';
-
   return (
     <section className='h-screen flex flex-col justify-start items-center'>
+      {/* dates module */}
+      {dateModule && (
+        <div
+          onClick={() => setDateModule(false)}
+          className='w-screen h-screen z-50 bg-gray-400 bg-opacity-20 fixed inset-0 flex justify-center items-center'
+        >
+          <div onClick={(e) => e.stopPropagation()}>
+            <input
+              type='date'
+              name='date'
+              onChange={changeHandler}
+              className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+            />
+            <input
+              type='time'
+              name='time'
+              onChange={changeHandler}
+              className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+            />
+          </div>
+        </div>
+      )}
+
       <Layout>
         {/* tag */}
         <div className='lg:w-1/2 w-80 my-7 flex'>
@@ -86,12 +118,11 @@ const FormNotePage = () => {
               <label className='opacity-70'>todo</label>
             </div>
           </div>
-
           {/* option list */}
-          <div className='h-96'>
+          <div className='h-56'>
             <div className='opacity-70'>Add to card</div>
-            <div className='flex flex-col  justify-start items-center h-80'>
-              <ul className='h-72 w-40 flex flex-col justify-around items-start px-5 py-3 bg-main-grey rounded-xl text-main-white'>
+            <div className='flex flex-col  justify-start items-center h-64'>
+              <ul className='h-56 w-40 flex flex-col justify-around items-start px-5 py-3 bg-main-grey rounded-xl text-main-white'>
                 <li className='flex'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -115,7 +146,10 @@ const FormNotePage = () => {
 
                   <a className={optionClass}>labels</a>
                 </li>
-                <li className='flex'>
+                <li
+                  onClick={() => setDateModule(true)}
+                  className='flex cursor-pointer'
+                >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -132,24 +166,6 @@ const FormNotePage = () => {
                   </svg>
 
                   <a className={optionClass}>dates</a>
-                </li>
-                <li className='flex'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke-width='1.5'
-                    stroke='currentColor'
-                    className='w-6 h-6'
-                  >
-                    <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      d='M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
-                  </svg>
-
-                  <a className={optionClass}>alarm clock</a>
                 </li>
                 <li className='flex'>
                   <svg
