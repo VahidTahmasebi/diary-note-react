@@ -9,10 +9,10 @@ const FormNotePage = () => {
   const [noteValues, setNoteValues] = useState({
     subject: '',
     textarea: '',
-    cover: null,
-    date: null,
-    time: null,
-    location: null,
+    cover: false,
+    date: false,
+    time: false,
+    location: false,
   });
   // module state
   const [modalState, setModalState] = useState({
