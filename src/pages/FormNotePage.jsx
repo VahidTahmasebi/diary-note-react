@@ -14,6 +14,9 @@ const FormNotePage = () => {
     time: false,
     location: false,
   });
+  const [inputTags, setInputTags] = useState('');
+  const [tags, setTags] = useState([]);
+
   // module state
   const [modalState, setModalState] = useState({
     datesModal: false,
@@ -28,6 +31,17 @@ const FormNotePage = () => {
     console.log(target.value);
     setNoteValues({ ...noteValues, [target.name]: target.value });
   };
+
+  //  new tag handler
+  const addNewTagHandler = (e) => {
+    e.preventDefault();
+
+    if (inputTags.length) {
+      setTags((prevState) => [...prevState, [inputTags]]);
+    }
+    setInputTags('');
+  };
+
   // cover handler
   const coverSelectHandler = (e) => {
     const reader = new FileReader();
@@ -51,6 +65,7 @@ const FormNotePage = () => {
         date: noteValues.date,
         time: noteValues.time,
         location: noteValues.location,
+        tags: tags,
       })
     );
     setNoteValues({
@@ -60,6 +75,7 @@ const FormNotePage = () => {
       date: null,
       time: null,
       location: null,
+      tags: '',
     });
     navigate('/notes-list');
   };
@@ -75,18 +91,49 @@ const FormNotePage = () => {
         noteValues={noteValues}
       />
       <Layout>
-        {/* tag */}
-        <div className='lg:w-1/2 w-80 my-7 flex'>
-          <h4 className='mr-3 opacity-70'>tag</h4>
-          <div className=''>
-            <p>work</p>
+        {/* tags */}
+        <div className='flex w-3/6 my-12 pr-3'>
+          <div className=' w-8/12 flex'>
+            <div className='flex w-2/5 mr-4'>
+              <input
+                type='text'
+                name='inputTags'
+                value={inputTags}
+                onChange={(e) => setInputTags(e.target.value)}
+                placeholder='note tags...'
+                className='py-2 px-3 w-8/12 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              />
+              <button
+                type='submit'
+                onClick={addNewTagHandler}
+                className='w-5/12 py-2 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-sm font-semibold shadow-md outline-none'
+              >
+                Add tags
+              </button>
+            </div>
+            {tags.length ? (
+              <span className='w-7/12 h-10 flex justify-start items-center pl-3 bg-main-grey text-main-black rounded-xl outline-none shadow-lg transition ease-in duration-200 overflow-hidden no-scrollbar overflow-x-scroll scroll-auto'>
+                {tags.map((tag) => {
+                  return (
+                    <ul>
+                      <li className='mr-2 py-1 px-2 bg-white rounded-xl text-xs'>
+                        {tag}
+                      </li>
+                    </ul>
+                  );
+                })}
+              </span>
+            ) : (
+              ''
+            )}
           </div>
         </div>
+        {/* end tag */}
 
         {/* main */}
         <form onSubmit={onSubmit} className='w-3/6 flex justify-between'>
-          <div>
-            <div className='flex flex-col lg:w-96'>
+          <div className='w-5/6'>
+            <div className='flex flex-col lg:w-5/6'>
               <label htmlFor='subject' className='opacity-70'>
                 subject
               </label>
@@ -100,7 +147,7 @@ const FormNotePage = () => {
                 className='lg:w-full p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
               />
             </div>
-            <div className='flex flex-col lg:w-96'>
+            <div className='flex flex-col lg:w-5/6'>
               <label className='opacity-70'>note</label>
               <textarea
                 className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
