@@ -18,6 +18,18 @@ const NotesListPage = () => {
   return (
     <section className='h-screen flex flex-col justify-start items-center'>
       <Layout>
+        {/* tags */}
+        <select name='tags' id='tags' className='text-black'>
+          <option value=''>All</option>
+          {notes.map((task, i) => {
+            return (
+              <option value={task.tags} key={i}>
+                {task.tags}
+              </option>
+            );
+          })}
+        </select>
+        {/* note list */}
         <div className=' w-screen flex flex-col items-center'>
           <ul className='my-16 h-96 w-2/6 px-3 overflow-auto'>
             {notes.map((note) => (

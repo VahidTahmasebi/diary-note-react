@@ -16,7 +16,6 @@ const FormNotePage = () => {
   });
   const [inputTags, setInputTags] = useState('');
   const [tags, setTags] = useState([]);
-
   // module state
   const [modalState, setModalState] = useState({
     datesModal: false,
@@ -28,7 +27,6 @@ const FormNotePage = () => {
 
   // change form handler
   const changeHandler = ({ target }) => {
-    console.log(target.value);
     setNoteValues({ ...noteValues, [target.name]: target.value });
   };
 
@@ -37,7 +35,7 @@ const FormNotePage = () => {
     e.preventDefault();
 
     if (inputTags.length) {
-      setTags((prevState) => [...prevState, [inputTags]]);
+      setTags((prevState) => [...prevState, inputTags]);
     }
     setInputTags('');
   };
@@ -75,7 +73,6 @@ const FormNotePage = () => {
       date: null,
       time: null,
       location: null,
-      tags: '',
     });
     navigate('/notes-list');
   };
@@ -94,37 +91,45 @@ const FormNotePage = () => {
         {/* tags */}
         <div className='flex w-3/6 my-12 pr-3'>
           <div className=' w-8/12 flex'>
-            <div className='flex w-2/5 mr-4'>
-              <input
-                type='text'
-                name='inputTags'
-                value={inputTags}
-                onChange={(e) => setInputTags(e.target.value)}
-                placeholder='note tags...'
-                className='py-2 px-3 w-8/12 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
-              />
-              <button
-                type='submit'
-                onClick={addNewTagHandler}
-                className='w-5/12 py-2 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-sm font-semibold shadow-md outline-none'
-              >
-                Add tags
-              </button>
-            </div>
-            {tags.length ? (
-              <span className='w-7/12 h-10 flex justify-start items-center pl-3 bg-main-grey text-main-black rounded-xl outline-none shadow-lg transition ease-in duration-200 overflow-hidden no-scrollbar overflow-x-scroll scroll-auto'>
-                {tags.map((tag) => {
+            {!tags.length ? (
+              <div className='flex w-3/5 mr-4'>
+                <input
+                  type='text'
+                  maxLength='20'
+                  value={inputTags}
+                  onChange={(e) => setInputTags(e.target.value)}
+                  placeholder='note tags...'
+                  className='py-2 px-3 w-9/12 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                />
+                <button
+                  type='submit'
+                  onClick={addNewTagHandler}
+                  className='w-4/12 py-2 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
+                >
+                  Add tags
+                </button>
+              </div>
+            ) : (
+              <span className='w-7/12 h-10 flex justify-start items-center text-main-black'>
+                <label className='opacity-70 text-white'>Tag: </label>
+                {tags.map((tag, i) => {
                   return (
-                    <ul>
-                      <li className='mr-2 py-1 px-2 bg-white rounded-xl text-xs'>
-                        {tag}
-                      </li>
-                    </ul>
+                    <div
+                      value={tag}
+                      key={i}
+                      className='ml-2 py-1 pl-2 pr-3 bg-white leading-relaxed rounded-xl text-xs'
+                    >
+                      <span
+                        onClick={() => setTags('')}
+                        className=' mr-1.5 px-1 pb-0.5 text-sm font-bold hover:bg-red-200 rounded-full transition ease-in duration-200 cursor-pointer'
+                      >
+                        ×
+                      </span>
+                      {tag}
+                    </div>
                   );
                 })}
               </span>
-            ) : (
-              ''
             )}
           </div>
         </div>
@@ -133,6 +138,7 @@ const FormNotePage = () => {
         {/* main */}
         <form onSubmit={onSubmit} className='w-3/6 flex justify-between'>
           <div className='w-5/6'>
+            {/* subject */}
             <div className='flex flex-col lg:w-5/6'>
               <label htmlFor='subject' className='opacity-70'>
                 subject
@@ -147,6 +153,7 @@ const FormNotePage = () => {
                 className='lg:w-full p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
               />
             </div>
+            {/* textarea */}
             <div className='flex flex-col lg:w-5/6'>
               <label className='opacity-70'>note</label>
               <textarea
