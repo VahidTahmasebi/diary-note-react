@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import NoteModal from '../components/NoteModal';
 import { addAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
 const FormNotePage = () => {
   const [noteValues, setNoteValues] = useState({
-    subject: '',
-    textarea: '',
-    cover: false,
-    date: false,
-    time: false,
-    location: false,
+    subjectValue: '',
+    textareaValue: '',
+    coverValue: false,
+    dateValue: false,
+    timeValue: false,
+    positionValue: false,
   });
   const [inputTags, setInputTags] = useState('');
-  const [tags, setTags] = useState([]);
+  const [tagsValue, setTagsValue] = useState([]);
   // module state
   const [modalState, setModalState] = useState({
     datesModal: false,
-    locationModal: false,
+    positionModal: false,
   });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // change form handler
   const changeHandler = ({ target }) => {
@@ -35,7 +36,7 @@ const FormNotePage = () => {
     e.preventDefault();
 
     if (inputTags.length) {
-      setTags((prevState) => [...prevState, inputTags]);
+      setTagsValue((prevState) => [...prevState, inputTags]);
     }
     setInputTags('');
   };
@@ -45,7 +46,7 @@ const FormNotePage = () => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setNoteValues({ cover: reader.result });
+        setNoteValues({ coverValue: reader.result });
       }
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -57,22 +58,22 @@ const FormNotePage = () => {
     e.preventDefault();
     dispatch(
       addAsyncNotes({
-        subject: noteValues.subject,
-        textarea: noteValues.textarea,
-        cover: noteValues.cover,
-        date: noteValues.date,
-        time: noteValues.time,
-        location: noteValues.location,
-        tags: tags,
+        subject: noteValues.subjectValue,
+        textarea: noteValues.textareaValue,
+        cover: noteValues.coverValue,
+        date: noteValues.dateValue,
+        time: noteValues.timeValue,
+        position: noteValues.positionValue,
+        tags: tagsValue,
       })
     );
     setNoteValues({
-      subject: '',
-      textarea: '',
-      cover: null,
-      date: null,
-      time: null,
-      location: null,
+      subjectValue: '',
+      textareaValue: '',
+      coverValue: null,
+      dateValue: null,
+      timeValue: null,
+      positionValue: null,
     });
     navigate('/notes-list');
   };
@@ -91,7 +92,7 @@ const FormNotePage = () => {
         {/* tags */}
         <div className='flex w-3/6 my-12 pr-3'>
           <div className=' w-8/12 flex'>
-            {!tags.length ? (
+            {!tagsValue.length ? (
               <div className='flex w-3/5 mr-4'>
                 <input
                   type='text'
@@ -112,7 +113,7 @@ const FormNotePage = () => {
             ) : (
               <span className='w-7/12 h-10 flex justify-start items-center text-main-black'>
                 <label className='opacity-70 text-white'>Tag: </label>
-                {tags.map((tag, i) => {
+                {tagsValue.map((tag, i) => {
                   return (
                     <div
                       value={tag}
@@ -120,7 +121,7 @@ const FormNotePage = () => {
                       className='ml-2 py-1 pl-2 pr-3 bg-white leading-relaxed rounded-xl text-xs'
                     >
                       <span
-                        onClick={() => setTags('')}
+                        onClick={() => setTagsValue('')}
                         className=' mr-1.5 px-1 pb-0.5 text-sm font-bold hover:bg-red-200 rounded-full transition ease-in duration-200 cursor-pointer'
                       >
                         ×
@@ -140,14 +141,14 @@ const FormNotePage = () => {
           <div className='w-5/6'>
             {/* subject */}
             <div className='flex flex-col lg:w-5/6'>
-              <label htmlFor='subject' className='opacity-70'>
+              <label htmlFor='subjectValue' className='opacity-70'>
                 subject
               </label>
               <input
-                type='subject'
-                id='subject'
-                name='subject'
-                value={noteValues.subject}
+                type='subjectValue'
+                id='subjectValue'
+                name='subjectValue'
+                value={noteValues.subjectValue}
                 onChange={changeHandler}
                 placeholder='your subject...'
                 className='lg:w-full p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
@@ -159,8 +160,8 @@ const FormNotePage = () => {
               <textarea
                 className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                 placeholder='your note...'
-                value={noteValues.textarea}
-                name='textarea'
+                value={noteValues.textareaValue}
+                name='textareaValue'
                 onChange={changeHandler}
               />
             </div>
@@ -221,7 +222,7 @@ const FormNotePage = () => {
                 </li>
                 <li
                   onClick={() =>
-                    setModalState({ ...modalState, locationModal: true })
+                    setModalState({ ...modalState, positionModal: true })
                   }
                   className='flex cursor-pointer'
                 >
