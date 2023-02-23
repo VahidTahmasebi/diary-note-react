@@ -80,7 +80,7 @@ const FormNotePage = () => {
   // option list className
   const optionClass = 'ml-3 transition-all duration-75 ease-in';
   return (
-    <section className='h-screen flex flex-col justify-start items-center'>
+    <>
       <NoteModal
         modalState={modalState}
         setModalState={setModalState}
@@ -295,7 +295,7 @@ const FormNotePage = () => {
           </div>
         </form>
       </Layout>
-    </section>
+    </>
   );
 };
 
