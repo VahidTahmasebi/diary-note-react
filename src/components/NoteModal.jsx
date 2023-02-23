@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const NoteModal = ({
   modalState,
@@ -8,6 +9,11 @@ const NoteModal = ({
   noteValues,
 }) => {
   const { datesModal, locationModal } = modalState;
+
+  const location = useLocation();
+
+  // address of the current page
+  const URL = window.location.href === 'http://localhost:8080/new-note';
 
   return (
     <>
@@ -21,14 +27,14 @@ const NoteModal = ({
             <input
               type='date'
               name='dateValue'
-              value={noteValues.dateValue}
+              value={URL ? noteValues.dateValue : location.state.note.date}
               onChange={changeHandler}
               className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
             />
             <input
               type='time'
               name='timeValue'
-              value={noteValues.timeValue}
+              value={URL ? noteValues.timeValue : location.state.note.time}
               onChange={changeHandler}
               className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
             />

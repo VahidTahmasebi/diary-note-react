@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NoteModal from '../components/NoteModal';
 import { addAsyncNotes } from '../feature/notesSlice';
@@ -25,6 +25,9 @@ const FormNotePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
+  // address of the current page
+  const URL = window.location.href === 'http://localhost:8080/new-note';
 
   // change form handler
   const changeHandler = ({ target }) => {
@@ -53,6 +56,7 @@ const FormNotePage = () => {
   };
 
   // send values
+  // clear entries
   // move to the note list page
   const onSubmit = (e) => {
     e.preventDefault();
@@ -92,7 +96,7 @@ const FormNotePage = () => {
         {/* tags */}
         <div className='flex w-3/6 my-12 pr-3'>
           <div className=' w-8/12 flex'>
-            {!tagsValue.length ? (
+            {!tagsValue.length && URL ? (
               <div className='flex w-3/5 mr-4'>
                 <input
                   type='text'
@@ -126,7 +130,7 @@ const FormNotePage = () => {
                       >
                         ×
                       </span>
-                      {tag}
+                      {URL ? tag : location.state.note.tags}
                     </div>
                   );
                 })}
@@ -148,7 +152,9 @@ const FormNotePage = () => {
                 type='subjectValue'
                 id='subjectValue'
                 name='subjectValue'
-                value={noteValues.subjectValue}
+                value={
+                  URL ? noteValues.subjectValue : location.state.note.subject
+                }
                 onChange={changeHandler}
                 placeholder='your subject...'
                 className='lg:w-full p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
@@ -160,7 +166,9 @@ const FormNotePage = () => {
               <textarea
                 className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                 placeholder='your note...'
-                value={noteValues.textareaValue}
+                value={
+                  URL ? noteValues.textareaValue : location.state.note.textarea
+                }
                 name='textareaValue'
                 onChange={changeHandler}
               />
