@@ -1,3 +1,4 @@
+import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -9,6 +10,7 @@ const FormNotePage = () => {
   const [noteValues, setNoteValues] = useState({
     subjectValue: '',
     textareaValue: '',
+    progressValue: null,
     coverValue: false,
     dateValue: false,
     timeValue: false,
@@ -18,6 +20,7 @@ const FormNotePage = () => {
   const [tagsValue, setTagsValue] = useState([]);
   // module state
   const [modalState, setModalState] = useState({
+    progressModal: false,
     datesModal: false,
     positionModal: false,
   });
@@ -44,6 +47,12 @@ const FormNotePage = () => {
     setInputTags('');
   };
 
+  // select progress handler
+  const selectProgressHandler = (selectedProgress) => {
+    // setNoteValues(value);
+    setNoteValues({ ...noteValues, progressValue: selectedProgress });
+  };
+  
   // cover handler
   const coverSelectHandler = (e) => {
     const reader = new FileReader();
@@ -64,6 +73,7 @@ const FormNotePage = () => {
       addAsyncNotes({
         subject: noteValues.subjectValue,
         textarea: noteValues.textareaValue,
+        progress: noteValues.progressValue,
         cover: noteValues.coverValue,
         date: noteValues.dateValue,
         time: noteValues.timeValue,
@@ -74,6 +84,7 @@ const FormNotePage = () => {
     setNoteValues({
       subjectValue: '',
       textareaValue: '',
+      progressValue: null,
       coverValue: null,
       dateValue: null,
       timeValue: null,
@@ -85,12 +96,13 @@ const FormNotePage = () => {
   // option list className
   const optionClass = 'ml-3 transition-all duration-75 ease-in';
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <NoteModal
         modalState={modalState}
         setModalState={setModalState}
         changeHandler={changeHandler}
         noteValues={noteValues}
+        selectProgressHandler={selectProgressHandler}
       />
       <Layout>
         {/* tags */}
@@ -141,7 +153,7 @@ const FormNotePage = () => {
         {/* end tag */}
 
         {/* main */}
-        <form onSubmit={onSubmit} className='w-3/6 flex justify-between'>
+        <div className='w-3/6 flex justify-between'>
           <div className='w-5/6'>
             {/* subject */}
             <div className='flex flex-col lg:w-5/6'>
@@ -182,7 +194,12 @@ const FormNotePage = () => {
             <div className='opacity-70'>Add to card</div>
             <div className='flex flex-col  justify-start items-center h-64'>
               <ul className='h-56 w-40 flex flex-col justify-around items-start px-5 py-3 bg-main-grey rounded-xl text-main-white'>
-                <li className='flex'>
+                <li
+                  onClick={() =>
+                    setModalState({ ...modalState, progressModal: true })
+                  }
+                  className='flex cursor-pointer'
+                >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -194,16 +211,16 @@ const FormNotePage = () => {
                     <path
                       strokeLinecap='round'
                       strokeLinejoin='round'
-                      d='M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z'
+                      d='M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z'
                     />
                     <path
                       strokeLinecap='round'
                       strokeLinejoin='round'
-                      d='M6 6h.008v.008H6V6z'
+                      d='M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z'
                     />
                   </svg>
 
-                  <a className={optionClass}>labels</a>
+                  <a className={optionClass}>Progress</a>
                 </li>
                 <li
                   onClick={() =>
@@ -302,9 +319,9 @@ const FormNotePage = () => {
               </button>
             </div>
           </div>
-        </form>
+        </div>
       </Layout>
-    </>
+    </form>
   );
 };
 

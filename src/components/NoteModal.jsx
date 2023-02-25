@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import Select from 'react-select';
 
 const NoteModal = ({
   modalState,
@@ -7,16 +8,46 @@ const NoteModal = ({
   changeHandler,
   locationValue,
   noteValues,
+  selectProgressHandler,
 }) => {
-  const { datesModal, locationModal } = modalState;
+  const { progressModal, datesModal, locationModal } = modalState;
+  const selectedOptions = [
+    { label: '😴 - 0', value: 'progress0' },
+    { label: '🤠 - %25', value: 'progress25' },
+    { label: '🚀 - %50', value: 'progress50' },
+    { label: '😎 - %75', value: 'progress75' },
+    { label: '🥳 - %100', value: 'progress100' },
+  ];
 
   const location = useLocation();
-
   // address of the current page
   const URL = window.location.href === 'http://localhost:8080/new-note';
 
   return (
     <>
+      {/* progress module */}
+      {progressModal && (
+        <div
+          onClick={() => setModalState({ ...modalState, progressModal: false })}
+          className='w-screen h-screen z-50 bg-gray-400 bg-opacity-20 fixed inset-0 flex justify-center items-center select-none'
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className='flex flex-col w-32'
+          >
+            <Select
+              value={
+                URL ? noteValues.progressValue : location.state.note.progress
+              }
+              onChange={selectProgressHandler}
+              options={selectedOptions}
+              placeholder='progress...'
+              isSearchable={false}
+            />
+          </div>
+        </div>
+      )}
+
       {/* dates module */}
       {datesModal && (
         <div
