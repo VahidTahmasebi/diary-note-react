@@ -17,6 +17,7 @@ const NotesListPage = () => {
 
   return (
     <Layout>
+      <div className=''>There are {notes.length} more notes left</div>
       {/* tags */}
       <select name='tags' id='tags' className='text-black'>
         <option value=''>All</option>
