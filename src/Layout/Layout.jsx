@@ -1,10 +1,10 @@
 import React from 'react';
 import Navigation from '../components/Navigation';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, noteValues, setNoteValues }) => {
   return (
     <div className='h-screen flex flex-col justify-start items-center'>
-      <Navigation />
+      <Navigation noteValues={noteValues} setNoteValues={setNoteValues} />
       {children}
     </div>
   );
