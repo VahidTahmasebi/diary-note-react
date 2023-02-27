@@ -14,7 +14,7 @@ const FormNotePage = () => {
     coverValue: false,
     dateValue: false,
     timeValue: false,
-    positionValue: false,
+    placeValue: '',
   });
   const [inputTags, setInputTags] = useState('');
   const [tagsValue, setTagsValue] = useState([]);
@@ -22,7 +22,7 @@ const FormNotePage = () => {
   const [modalState, setModalState] = useState({
     progressModal: false,
     datesModal: false,
-    positionModal: false,
+    placeModal: false,
   });
 
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const FormNotePage = () => {
     // setNoteValues(value);
     setNoteValues({ ...noteValues, progressValue: selectedProgress });
   };
-  
+
   // cover handler
   const coverSelectHandler = (e) => {
     const reader = new FileReader();
@@ -77,7 +77,7 @@ const FormNotePage = () => {
         cover: noteValues.coverValue,
         date: noteValues.dateValue,
         time: noteValues.timeValue,
-        position: noteValues.positionValue,
+        place: noteValues.placeValue,
         tags: tagsValue,
       })
     );
@@ -88,7 +88,7 @@ const FormNotePage = () => {
       coverValue: null,
       dateValue: null,
       timeValue: null,
-      positionValue: null,
+      placeValue: null,
     });
     navigate('/notes-list');
   };
@@ -103,6 +103,7 @@ const FormNotePage = () => {
         changeHandler={changeHandler}
         noteValues={noteValues}
         selectProgressHandler={selectProgressHandler}
+        setNoteValues={setNoteValues}
       />
       <Layout>
         {/* tags */}
@@ -247,7 +248,7 @@ const FormNotePage = () => {
                 </li>
                 <li
                   onClick={() =>
-                    setModalState({ ...modalState, positionModal: true })
+                    setModalState({ ...modalState, placeModal: true })
                   }
                   className='flex cursor-pointer'
                 >
