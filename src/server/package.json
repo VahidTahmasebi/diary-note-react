@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "json-server --p 9000 --watch db.json"
+    "server": "json-server --p 9000 --watch db.json",
+    "server-cities": "json-server --p 9001 --watch cities.json"
   },
   "keywords": [],
   "author": "",
