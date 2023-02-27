@@ -53,17 +53,6 @@ const FormNotePage = () => {
     setNoteValues({ ...noteValues, progressValue: selectedProgress });
   };
 
-  // cover handler
-  const coverSelectHandler = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setNoteValues({ coverValue: reader.result });
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
-
   // send values
   // clear entries
   // move to the note list page
@@ -110,7 +99,7 @@ const FormNotePage = () => {
         selectProgressHandler={selectProgressHandler}
         setNoteValues={setNoteValues}
       />
-      <Layout>
+      <Layout noteValues={noteValues} setNoteValues={setNoteValues}>
         {/* tags */}
         <div className='flex w-3/6 my-12 pr-3'>
           <div className=' w-8/12 flex'>
@@ -308,22 +297,6 @@ const FormNotePage = () => {
 
             {/* Add note button */}
             <div className='text-center'>
-              <div className='mb-3'>
-                <input
-                  type='file'
-                  accept='image/*'
-                  name='image-upload'
-                  id='file'
-                  onChange={coverSelectHandler}
-                  className='opacity-0 w-0.5 h-0.5 absolute'
-                />
-                <label
-                  htmlFor='file'
-                  className='py-2 px-4 mb-2 cursor-pointer rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
-                >
-                  Cover
-                </label>
-              </div>
               <button
                 type='submit'
                 className=' py-2 px-4 my-1 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
