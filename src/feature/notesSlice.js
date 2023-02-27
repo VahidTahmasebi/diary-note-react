@@ -22,10 +22,12 @@ export const addAsyncNotes = createAsyncThunk(
         id: Date.now(),
         subject: payload.subject,
         textarea: payload.textarea,
+        progress: payload.progress,
         cover: payload.cover,
         date: payload.date,
         time: payload.time,
-        locationValue: payload.locationValue,
+        place: payload.place,
+        tags: payload.tags,
       });
       return response.data;
     } catch (error) {
@@ -42,14 +44,14 @@ const initialState = {
 };
 
 // reducers
-const noteSlice = createSlice({
+const notesSlice = createSlice({
   name: 'notes',
   initialState,
   extraReducers: {
     [getAsyncNotes.fulfilled]: (state, action) => {
       return { ...state, notes: action.payload, loading: false, error: null };
     },
-    [getAsyncNotes.pending]: (state, action) => {
+    [getAsyncNotes.pending]: (state) => {
       return { ...state, notes: [], loading: true, error: null };
     },
     [getAsyncNotes.rejected]: (state, { payload }) => {
@@ -61,4 +63,4 @@ const noteSlice = createSlice({
   },
 });
 
-export default noteSlice.reducer;
+export default notesSlice.reducer;
