@@ -10,7 +10,7 @@ const FormNotePage = () => {
   const [noteValues, setNoteValues] = useState({
     subjectValue: '',
     textareaValue: '',
-    progressValue: null,
+    progressValue: false,
     coverValue: false,
     dateValue: false,
     timeValue: false,
@@ -69,32 +69,37 @@ const FormNotePage = () => {
   // move to the note list page
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      addAsyncNotes({
-        subject: noteValues.subjectValue,
-        textarea: noteValues.textareaValue,
-        progress: noteValues.progressValue,
-        cover: noteValues.coverValue,
-        date: noteValues.dateValue,
-        time: noteValues.timeValue,
-        place: noteValues.placeValue,
-        tags: tagsValue,
-      })
-    );
-    setNoteValues({
-      subjectValue: '',
-      textareaValue: '',
-      progressValue: null,
-      coverValue: null,
-      dateValue: null,
-      timeValue: null,
-      placeValue: null,
-    });
-    navigate('/notes-list');
+
+    // if there is a subject amount
+    if (noteValues.subjectValue) {
+      dispatch(
+        addAsyncNotes({
+          subject: noteValues.subjectValue,
+          textarea: noteValues.textareaValue,
+          progress: noteValues.progressValue,
+          cover: noteValues.coverValue,
+          date: noteValues.dateValue,
+          time: noteValues.timeValue,
+          place: noteValues.placeValue,
+          tags: tagsValue,
+        })
+      );
+      setNoteValues({
+        subjectValue: '',
+        textareaValue: '',
+        progressValue: null,
+        coverValue: null,
+        dateValue: null,
+        timeValue: null,
+        placeValue: null,
+      });
+      navigate('/notes-list');
+    }
   };
 
   // option list className
   const optionClass = 'ml-3 transition-all duration-75 ease-in';
+
   return (
     <form onSubmit={onSubmit}>
       <NoteModal
@@ -173,6 +178,7 @@ const FormNotePage = () => {
                 className='lg:w-full p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
               />
             </div>
+
             {/* textarea */}
             <div className='flex flex-col lg:w-5/6'>
               <label className='opacity-70'>note</label>
@@ -190,11 +196,13 @@ const FormNotePage = () => {
               <label className='opacity-70'>todo</label>
             </div>
           </div>
+
           {/* option list */}
           <div className='h-56'>
             <div className='opacity-70'>Add to card</div>
             <div className='flex flex-col  justify-start items-center h-64'>
               <ul className='h-56 w-40 flex flex-col justify-around items-start px-5 py-3 bg-main-grey rounded-xl text-main-white'>
+                {/* Progress */}
                 <li
                   onClick={() =>
                     setModalState({ ...modalState, progressModal: true })
@@ -220,9 +228,10 @@ const FormNotePage = () => {
                       d='M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z'
                     />
                   </svg>
-
                   <a className={optionClass}>Progress</a>
                 </li>
+
+                {/* dates */}
                 <li
                   onClick={() =>
                     setModalState({ ...modalState, datesModal: true })
@@ -246,6 +255,8 @@ const FormNotePage = () => {
 
                   <a className={optionClass}>dates</a>
                 </li>
+
+                {/* location */}
                 <li
                   onClick={() =>
                     setModalState({ ...modalState, placeModal: true })
@@ -271,9 +282,10 @@ const FormNotePage = () => {
                       d='M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z'
                     />
                   </svg>
-
                   <a className={optionClass}>location</a>
                 </li>
+
+                {/* checklist */}
                 <li className='flex'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -289,12 +301,12 @@ const FormNotePage = () => {
                       d='M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z'
                     />
                   </svg>
-
                   <a className={optionClass}>checklist</a>
                 </li>
               </ul>
             </div>
 
+            {/* Add note button */}
             <div className='text-center'>
               <div className='mb-3'>
                 <input
