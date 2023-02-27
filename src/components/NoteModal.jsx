@@ -43,6 +43,43 @@ const NoteModal = ({
               options={selectedOptions}
               placeholder='progress...'
               isSearchable={false}
+              myFontSize='17px'
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  width: '200px',
+                  borderRadius: '15px',
+                  boxShadow: 'inset 0 1px 0 rgba(0, 0, 0, 0.1)',
+                }),
+                option: (provided, state) => ({
+                  ...provided,
+                  fontWeight: state.isSelected ? 'bold' : 'normal',
+                  color: 'black',
+                  width: '200px',
+                  fontSize: state.selectProps.myFontSize,
+                }),
+                menu: (provided, state) => ({
+                  ...provided,
+                  fontWeight: state.isSelected ? 'bold' : 'normal',
+                  color: 'black',
+                  width: '200px',
+                  borderRadius: '15px',
+                  boxShadow: 'inset 0 1px 0 rgba(0, 0, 0, 0.1)',
+                  fontSize: state.selectProps.myFontSize,
+                }),
+                menuList: (provided, state) => ({
+                  ...provided,
+                  color: 'black',
+                  width: '200px',
+                  borderRadius: '15px',
+                  fontSize: state.selectProps.myFontSize,
+                }),
+                singleValue: (provided, state) => ({
+                  ...provided,
+                  width: '200px',
+                  fontSize: state.selectProps.myFontSize,
+                }),
+              }}
             />
           </div>
         </div>
