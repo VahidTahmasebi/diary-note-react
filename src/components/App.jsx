@@ -16,7 +16,7 @@ const App = () => {
             <Route path='/' element={<MainPage />} />
             <Route path='/new-note' element={<FormNotePage />} />
             <Route path='/notes-list' element={<NotesListPage />} />
-            <Route path='/user/:id' element={<FormNotePage />} />
+            <Route path='/note/:id' element={<FormNotePage />} />
           </Routes>
         </div>
       </BrowserRouter>
