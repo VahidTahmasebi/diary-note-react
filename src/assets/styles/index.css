@@ -12,3 +12,9 @@
   --mein-orange: #ec994b;
   --body-color: #1f2937;
 }
+input:checked + div {
+  @apply border-blue-500;
+}
+input:checked + div svg {
+  @apply block;
+}

@@ -1,7 +1,7 @@
-import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import CheckItem from '../components/CheckItem';
 import NoteModal from '../components/NoteModal';
 import { addAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
@@ -16,8 +16,13 @@ const FormNotePage = () => {
     timeValue: false,
     placeValue: '',
   });
+  // tags state
   const [inputTags, setInputTags] = useState('');
   const [tagsValue, setTagsValue] = useState([]);
+  // checklist state
+  const [inputChecklist, setInputChecklist] = useState('');
+  const [listChecklist, setListChecklist] = useState([]);
+
   // module state
   const [modalState, setModalState] = useState({
     progressModal: false,
@@ -25,7 +30,7 @@ const FormNotePage = () => {
     placeModal: false,
     checkListModal: false,
   });
-
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -48,6 +53,18 @@ const FormNotePage = () => {
     setInputTags('');
   };
 
+  // checklist handler
+  const addNewChecklistHandler = (check) => {
+    if (check) {
+      setListChecklist([
+        ...listChecklist,
+        { id: new Date().getTime(), check: check },
+      ]);
+    }
+
+    setInputChecklist('');
+  };
+
   // select progress handler
   const selectProgressHandler = (selectedProgress) => {
     // setNoteValues(value);
@@ -66,6 +83,7 @@ const FormNotePage = () => {
         addAsyncNotes({
           subject: noteValues.subjectValue,
           textarea: noteValues.textareaValue,
+          checklist: listChecklist,
           progress: noteValues.progressValue,
           cover: noteValues.coverValue,
           date: noteValues.dateValue,
@@ -189,57 +207,23 @@ const FormNotePage = () => {
               <ul className='flex flex-col lg:w-full h-fit p-3 pt-3 rounded-xl bg-gray-700 shadow-lg transition ease-in duration-200 overflow-y-auto'>
                 <div className='flex mb-4'>
                   <input
-                    type='checklistValue'
-                    id='checklistValue'
-                    name='checklistValue'
-                    // value={inputChecklist}
-                    // onChange={(e)=>}
+                    type='text'
+                    value={inputChecklist}
+                    onChange={(e) => setInputChecklist(e.target.value)}
                     placeholder='your check...'
                     className='py-2 px-3 w-11/12 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                   />
                   <button
                     type='submit'
-                    onClick={addNewTagHandler}
+                    onClick={() => addNewChecklistHandler(inputChecklist)}
                     className='w-2/12 py-2 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
                   >
                     Add
                   </button>
                 </div>
-                <li className='flex items-center lg:w-full h-fit max-h-20 mb-2 rounded-xl shadow-lg hover:ring-1 hover:ring-offset-1 hover:ring-indigo-200 transition ease-in duration-200'>
-                  <label
-                    htmlFor='checklist'
-                    className='flex px-5 py-3 h-full items-center overflow-hidden overflow-x-auto flex-1 cursor-pointer'
-                  >
-                    <input
-                      type='checkbox'
-                      id='checklist'
-                      name='checklist'
-                      className='opacity-0 absolute cursor-pointer'
-                    />
-                    <div className='bg-white border-2 rounded-md border-primary-color w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-primary-color'>
-                      <svg
-                        className='fill-current hidden w-2 h-2 text-primary-color pointer-events-none'
-                        version='1.1'
-                        viewBox='0 0 17 12'
-                        xmlns='http://www.w3.org/2000/svg'
-                      >
-                        <g fill='none' fillRule='evenodd'>
-                          <g
-                            transform='translate(-9 -11)'
-                            fill='#1F73F1'
-                            fillRule='nonzero'
-                          >
-                            <path d='m25.576 11.414c0.56558 0.55188 0.56558 1.4439 0 1.9961l-9.404 9.176c-0.28213 0.27529-0.65247 0.41385-1.0228 0.41385-0.37034 0-0.74068-0.13855-1.0228-0.41385l-4.7019-4.588c-0.56584-0.55188-0.56584-1.4442 0-1.9961 0.56558-0.55214 1.4798-0.55214 2.0456 0l3.679 3.5899 8.3812-8.1779c0.56558-0.55214 1.4798-0.55214 2.0456 0z' />
-                          </g>
-                        </g>
-                      </svg>
-                    </div>
-                    <span className='overflow-x-auto'>
-                      WWWWWWWWWWWWWWWWWWWWWW
-                    </span>
-                  </label>
-                  <span className='px-5 cursor-pointer'>delete</span>
-                </li>
+                {listChecklist.map((check) => (
+                  <CheckItem key={check.id} {...check} />
+                ))}
               </ul>
             </div>
           </div>
