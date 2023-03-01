@@ -60,7 +60,7 @@ const FormNotePage = () => {
     if (check) {
       setListChecklist([
         ...listChecklist,
-        { id: new Date().getTime(), check: check },
+        { id_check: new Date().getTime(), check: check },
       ]);
     }
 
@@ -114,6 +114,15 @@ const FormNotePage = () => {
     } else {
       return location.state.note.checklist;
     }
+  };
+
+  // delete checklist item
+  const deleteCheckHandler = (e, id_check) => {
+    e.preventDefault();
+    const filteredCheck = listChecklist.filter(
+      (check) => check.id_check !== id_check
+    );
+    setListChecklist(filteredCheck);
   };
 
   // option list className
@@ -232,8 +241,12 @@ const FormNotePage = () => {
                     Add
                   </button>
                 </div>
-                {checklistURL().map((check) => (
-                  <CheckItem key={check.id} {...check} />
+                {checklistURL().map((item) => (
+                  <CheckItem
+                    key={item.id_check}
+                    {...item}
+                    deleteCheckHandler={deleteCheckHandler}
+                  />
                 ))}
               </ul>
             </div>
