@@ -30,7 +30,7 @@ const FormNotePage = () => {
     placeModal: false,
     checkListModal: false,
   });
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,7 +54,9 @@ const FormNotePage = () => {
   };
 
   // checklist handler
-  const addNewChecklistHandler = (check) => {
+  const addNewChecklistHandler = (e, check) => {
+    e.preventDefault();
+
     if (check) {
       setListChecklist([
         ...listChecklist,
@@ -102,6 +104,15 @@ const FormNotePage = () => {
         placeValue: null,
       });
       navigate('/notes-list');
+    }
+  };
+
+  // the checklist is going to be mapped
+  const checklistURL = () => {
+    if (URL) {
+      return listChecklist;
+    } else {
+      return location.state.note.checklist;
     }
   };
 
@@ -215,13 +226,13 @@ const FormNotePage = () => {
                   />
                   <button
                     type='submit'
-                    onClick={() => addNewChecklistHandler(inputChecklist)}
+                    onClick={(e) => addNewChecklistHandler(e, inputChecklist)}
                     className='w-2/12 py-2 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
                   >
                     Add
                   </button>
                 </div>
-                {listChecklist.map((check) => (
+                {checklistURL().map((check) => (
                   <CheckItem key={check.id} {...check} />
                 ))}
               </ul>
