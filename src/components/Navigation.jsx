@@ -22,7 +22,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
     <div>
       {/* cover */}
       <div className='flex flex-col justify-start items-center relative'>
-        <div className='w-screen relative flex justify-center items-start'>
+        <div className='w-screen relative flex justify-center items-start '>
           <div
             style={{
               backgroundImage: `url(${
@@ -37,9 +37,9 @@ const Navigation = ({ noteValues, setNoteValues }) => {
             }}
             className='h-40 lg:w-4/6 w-full bg-cover bg-opacity-95 bg-blend-multiply relative bg-main-grey rounded-bl-full rounded-br-full'
           >
-            {/* <img src={noteValues.coverValue} /> */}
+            {/* profile */}
             <div className='flex justify-start items-center my-4 mx-9'>
-              <div className=' py-2 px-2 w-10 h-10 rounded-full bg-primary-color'>
+              <div className=' py-2 px-2 w-10 h-10 rounded-full bg-gray-400'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -57,6 +57,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
               </div>
               <p className='ml-3'>Guest</p>
             </div>
+            {/* button */}
             {!URL_NOTES_LIST && (
               <div className='mb-3'>
                 <input
@@ -69,7 +70,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
                 />
                 <label
                   htmlFor='file'
-                  className='absolute -bottom-4 right-44 py-2 px-4 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
+                  className='absolute -bottom-4 right-44 py-2 px-4 rounded-full bg-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
                 >
                   Cover
                 </label>

@@ -67,12 +67,9 @@ const NoteModal = ({
       {progressModal && (
         <div
           onClick={() => setModalState({ ...modalState, progressModal: false })}
-          className='w-screen h-screen z-50 bg-gray-400 bg-opacity-20 fixed inset-0 flex justify-center items-center select-none'
+          className='w-screen h-screen z-50 bg-slate-700 bg-opacity-80 fixed inset-0 flex justify-center items-center select-none'
         >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className='flex flex-col w-32'
-          >
+          <div onClick={(e) => e.stopPropagation()} className='flex flex-col'>
             <Select
               value={
                 URL ? noteValues.progressValue : location.state.note.progress
@@ -86,6 +83,7 @@ const NoteModal = ({
                 control: (provided) => ({
                   ...provided,
                   width: '200px',
+                  padding: '7px 3px',
                   borderRadius: '15px',
                   boxShadow: 'inset 0 1px 0 rgba(0, 0, 0, 0.1)',
                 }),
@@ -127,9 +125,12 @@ const NoteModal = ({
       {datesModal && (
         <div
           onClick={() => setModalState({ ...modalState, datesModal: false })}
-          className='w-screen h-screen z-50 bg-gray-400 bg-opacity-20 fixed inset-0 flex justify-center items-center'
+          className='w-screen h-screen z-50 bg-slate-700 bg-opacity-80 fixed inset-0 flex justify-center items-center'
         >
-          <div onClick={(e) => e.stopPropagation()}>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className='flex flex-col gap-3'
+          >
             <input
               type='date'
               name='dateValue'
@@ -152,12 +153,12 @@ const NoteModal = ({
       {placeModal && (
         <div
           onClick={() => setModalState({ ...modalState, placeModal: false })}
-          className='w-screen h-screen z-50 bg-gray-400 bg-opacity-20 fixed inset-0 flex justify-center items-center'
+          className='w-screen h-screen z-50 bg-slate-700 bg-opacity-80 fixed inset-0 flex justify-center items-center'
         >
           <div className='flex flex-col' onClick={(e) => e.stopPropagation()}>
             <span
               value={placesPreview}
-              className='lg:w-full h-fit max-h-40 overflow-y-auto bg-main-white text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              className='w-72 h-fit max-h-40 overflow-y-auto bg-main-white text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
             >
               {placesPreview &&
                 placesPreview.map((place, index) => (
@@ -177,9 +178,16 @@ const NoteModal = ({
               value={placeSearchTerm}
               onChange={placeSearchHandler}
               placeholder='city search'
-              className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              className='p-3 my-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
             />
-            <div>{URL ? noteValues.placeValue : location.state.note.place}</div>
+            <div
+              className={
+                noteValues.placeValue &&
+                'w-72 h-fit p-3 text-main-black bg-main-white rounded-xl'
+              }
+            >
+              {URL ? noteValues.placeValue : location.state.note.place}
+            </div>
           </div>
         </div>
       )}

@@ -16,6 +16,7 @@ const FormNotePage = () => {
     timeValue: false,
     placeValue: '',
   });
+
   // tags state
   const [inputTags, setInputTags] = useState('');
   const [tagsValue, setTagsValue] = useState([]);
@@ -103,7 +104,7 @@ const FormNotePage = () => {
         timeValue: null,
         placeValue: null,
       });
-      navigate('/notes-list');
+      navigate('/login?redirect=/notes-list');
     }
   };
 
@@ -126,7 +127,7 @@ const FormNotePage = () => {
   };
 
   // option list className
-  const optionClass = 'ml-3 transition-all duration-75 ease-in';
+  const optionClass = 'ml-3';
 
   return (
     <form onSubmit={onSubmit}>
@@ -140,7 +141,7 @@ const FormNotePage = () => {
       />
       <Layout noteValues={noteValues} setNoteValues={setNoteValues}>
         {/* tags */}
-        <div className='flex w-3/6 my-12 pr-3'>
+        <div className='flex w-3/6 my-9 pr-3'>
           <div className=' w-8/12 flex'>
             {!tagsValue.length && URL ? (
               <div className='flex w-3/5 mr-4'>
@@ -150,18 +151,18 @@ const FormNotePage = () => {
                   value={inputTags}
                   onChange={(e) => setInputTags(e.target.value)}
                   placeholder='note tags...'
-                  className='py-2 px-3 w-9/12 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                  className='py-1 px-3 w-9/12 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                 />
                 <button
                   type='submit'
                   onClick={addNewTagHandler}
-                  className='w-4/12 py-2 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
+                  className='w-4/12 py-1 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
                 >
                   Add tags
                 </button>
               </div>
             ) : (
-              <span className='w-7/12 h-10 flex justify-start items-center text-main-black'>
+              <span className='w-7/12 h-8 flex justify-start items-center text-main-black'>
                 <label className='opacity-70 text-white'>Tag: </label>
                 {tagsValue.map((tag, i) => {
                   return (
@@ -191,8 +192,8 @@ const FormNotePage = () => {
           <div className='w-5/6'>
             {/* subject */}
             <div className='flex flex-col lg:w-5/6'>
-              <label htmlFor='subjectValue' className='opacity-70'>
-                subject
+              <label htmlFor='subjectValue' className='opacity-70 mb-1'>
+                Subject
               </label>
               <input
                 type='subjectValue'
@@ -203,19 +204,22 @@ const FormNotePage = () => {
                 }
                 onChange={changeHandler}
                 placeholder='your subject...'
-                className='lg:w-full p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                className='lg:w-full p-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
               />
             </div>
 
             {/* textarea */}
-            <div className='flex flex-col lg:w-5/6'>
-              <label className='opacity-70'>note</label>
+            <div className='flex flex-col lg:w-5/6 my-4'>
+              <label htmlFor='textareaValue' className='opacity-70 mb-1'>
+                Note
+              </label>
               <textarea
-                className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                 placeholder='your note...'
                 value={
                   URL ? noteValues.textareaValue : location.state.note.textarea
                 }
+                id='textareaValue'
                 name='textareaValue'
                 onChange={changeHandler}
               />
@@ -223,20 +227,24 @@ const FormNotePage = () => {
 
             {/* checklist form */}
             <div className='lg:w-5/6'>
-              <label className='opacity-70'>Checklist</label>
-              <ul className='flex flex-col lg:w-full h-fit p-3 pt-3 rounded-xl bg-gray-700 shadow-lg transition ease-in duration-200 overflow-y-auto'>
+              <label htmlFor='checklist' className='opacity-70 mb-1'>
+                Checklist
+              </label>
+              <ul className='flex flex-col lg:w-full max-h-80 h-fit p-3 pt-3 rounded-xl bg-gray-700 shadow-lg transition ease-in duration-200 overflow-y-auto'>
                 <div className='flex mb-4'>
                   <input
                     type='text'
+                    id='checklist'
                     value={inputChecklist}
                     onChange={(e) => setInputChecklist(e.target.value)}
                     placeholder='your check...'
-                    className='py-2 px-3 w-11/12 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                    maxLength='23'
+                    className='py-2 px-3 w-11/12 text-main-white rounded-l-xl outline-none shadow-lg bg-gray-600 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                   />
                   <button
                     type='submit'
                     onClick={(e) => addNewChecklistHandler(e, inputChecklist)}
-                    className='w-2/12 py-2 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
+                    className='w-2/12 py-2 px-1 rounded-r-xl text-main-white bg-gray-600 ring-offset-1 hover:bg-primary-color-hover hover:text-main-white focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
                   >
                     Add
                   </button>
@@ -254,15 +262,15 @@ const FormNotePage = () => {
 
           {/* option list */}
           <div className='h-56'>
-            <div className='opacity-70'>Add to card</div>
-            <div className='flex flex-col  justify-start items-center h-64'>
-              <ul className='h-56 w-40 flex flex-col justify-around items-start px-5 py-3 bg-main-grey rounded-xl text-main-white'>
+            <div className='opacity-70 mb-0.5'>Add to card</div>
+            <div className='flex flex-col justify-start items-center h-64'>
+              <ul className='h-56 w-40 flex flex-col justify-around items-start px-5 py-3 bg-gray-700 rounded-xl text-main-white'>
                 {/* Progress */}
                 <li
                   onClick={() =>
                     setModalState({ ...modalState, progressModal: true })
                   }
-                  className='flex cursor-pointer'
+                  className='flex cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -291,7 +299,7 @@ const FormNotePage = () => {
                   onClick={() =>
                     setModalState({ ...modalState, datesModal: true })
                   }
-                  className='flex cursor-pointer'
+                  className='flex cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -308,7 +316,7 @@ const FormNotePage = () => {
                     />
                   </svg>
 
-                  <a className={optionClass}>dates</a>
+                  <a className={optionClass}>Dates</a>
                 </li>
 
                 {/* location */}
@@ -316,7 +324,7 @@ const FormNotePage = () => {
                   onClick={() =>
                     setModalState({ ...modalState, placeModal: true })
                   }
-                  className='flex cursor-pointer'
+                  className='flex cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -337,12 +345,12 @@ const FormNotePage = () => {
                       d='M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z'
                     />
                   </svg>
-                  <a className={optionClass}>location</a>
+                  <a className={optionClass}>Location</a>
                 </li>
 
-                {/* checklist */}
+                {/* tags */}
                 <li
-                  className='flex cursor-pointer'
+                  className='flex cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
                   onClick={() =>
                     setModalState({ ...modalState, checkListModal: true })
                   }
@@ -361,7 +369,7 @@ const FormNotePage = () => {
                       d='M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z'
                     />
                   </svg>
-                  <a className={optionClass}>checklist</a>
+                  <a className={optionClass}>Tags</a>
                 </li>
               </ul>
             </div>
