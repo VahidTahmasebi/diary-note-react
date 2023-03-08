@@ -18,7 +18,6 @@ const FormNotePage = () => {
   });
 
   // tags state
-  const [inputTags, setInputTags] = useState('');
   const [tagsValue, setTagsValue] = useState([]);
   // checklist state
   const [inputChecklist, setInputChecklist] = useState('');
@@ -29,7 +28,7 @@ const FormNotePage = () => {
     progressModal: false,
     datesModal: false,
     placeModal: false,
-    checkListModal: false,
+    tagsModal: false,
   });
 
   const dispatch = useDispatch();
@@ -42,16 +41,6 @@ const FormNotePage = () => {
   // change form handler
   const changeHandler = ({ target }) => {
     setNoteValues({ ...noteValues, [target.name]: target.value });
-  };
-
-  //  new tag handler
-  const addNewTagHandler = (e) => {
-    e.preventDefault();
-
-    if (inputTags.length) {
-      setTagsValue((prevState) => [...prevState, inputTags]);
-    }
-    setInputTags('');
   };
 
   // checklist handler
@@ -104,7 +93,7 @@ const FormNotePage = () => {
         timeValue: null,
         placeValue: null,
       });
-      navigate('/login?redirect=/notes-list');
+      navigate('/notes-list');
     }
   };
 
@@ -138,57 +127,12 @@ const FormNotePage = () => {
         noteValues={noteValues}
         selectProgressHandler={selectProgressHandler}
         setNoteValues={setNoteValues}
+        tagsValue={tagsValue}
+        setTagsValue={setTagsValue}
       />
       <Layout noteValues={noteValues} setNoteValues={setNoteValues}>
-        {/* tags */}
-        <div className='flex w-3/6 my-9 pr-3'>
-          <div className=' w-8/12 flex'>
-            {!tagsValue.length && URL ? (
-              <div className='flex w-3/5 mr-4'>
-                <input
-                  type='text'
-                  maxLength='20'
-                  value={inputTags}
-                  onChange={(e) => setInputTags(e.target.value)}
-                  placeholder='note tags...'
-                  className='py-1 px-3 w-9/12 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
-                />
-                <button
-                  type='submit'
-                  onClick={addNewTagHandler}
-                  className='w-4/12 py-1 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
-                >
-                  Add tags
-                </button>
-              </div>
-            ) : (
-              <span className='w-7/12 h-8 flex justify-start items-center text-main-black'>
-                <label className='opacity-70 text-white'>Tag: </label>
-                {tagsValue.map((tag, i) => {
-                  return (
-                    <div
-                      value={tag}
-                      key={i}
-                      className='ml-2 py-1 pl-2 pr-3 bg-white leading-relaxed rounded-xl text-xs'
-                    >
-                      <span
-                        onClick={() => setTagsValue('')}
-                        className=' mr-1.5 px-1 pb-0.5 text-sm font-bold hover:bg-red-200 rounded-full transition ease-in duration-200 cursor-pointer'
-                      >
-                        ×
-                      </span>
-                      {URL ? tag : location.state.note.tags}
-                    </div>
-                  );
-                })}
-              </span>
-            )}
-          </div>
-        </div>
-        {/* end tag */}
-
         {/* main */}
-        <div className='w-3/6 flex justify-between'>
+        <div className='w-3/6 flex justify-between mt-10'>
           <div className='w-5/6'>
             {/* subject */}
             <div className='flex flex-col lg:w-5/6'>
@@ -350,10 +294,10 @@ const FormNotePage = () => {
 
                 {/* tags */}
                 <li
-                  className='flex cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
                   onClick={() =>
-                    setModalState({ ...modalState, checkListModal: true })
+                    setModalState({ ...modalState, tagsModal: true })
                   }
+                  className='flex cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'

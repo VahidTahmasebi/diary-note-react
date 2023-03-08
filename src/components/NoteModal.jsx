@@ -11,12 +11,16 @@ const NoteModal = ({
   noteValues,
   setNoteValues,
   selectProgressHandler,
+  tagsValue,
+  setTagsValue,
 }) => {
-  const { progressModal, datesModal, placeModal } = modalState;
+  const { progressModal, datesModal, placeModal, tagsModal } = modalState;
 
   const { cities } = useSelector((state) => state.cities);
   const [placesPreview, setPlacesPreview] = useState([]);
   const [placeSearchTerm, setPlaceSearchTerm] = useState([]);
+
+  const [inputTags, setInputTags] = useState('');
 
   const selectedOptions = [
     { label: '😴 - 0', value: 'progress0' },
@@ -59,6 +63,16 @@ const NoteModal = ({
     setNoteValues({ ...noteValues, placeValue: place.name });
     setPlaceSearchTerm('');
     setPlacesPreview('');
+  };
+
+  //  new tag handler
+  const addNewTagHandler = (e) => {
+    e.preventDefault();
+
+    if (inputTags.length) {
+      setTagsValue((prevState) => [...prevState, inputTags]);
+    }
+    setInputTags('');
   };
 
   return (
@@ -187,6 +201,56 @@ const NoteModal = ({
               }
             >
               {URL ? noteValues.placeValue : location.state.note.place}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* tags module */}
+      {tagsModal && (
+        <div
+          onClick={() => setModalState({ ...modalState, tagsModal: false })}
+          className='w-screen h-screen z-50 bg-slate-700 bg-opacity-80 fixed inset-0 flex justify-center items-center'
+        >
+          <div className='flex flex-col' onClick={(e) => e.stopPropagation()}>
+            <div className='flex flex-col'>
+              <div className='flex mr-4'>
+                <input
+                  type='text'
+                  maxLength='20'
+                  value={inputTags}
+                  onChange={(e) => setInputTags(e.target.value)}
+                  placeholder='note tags...'
+                  className='w-9/12 py-2 px-3 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                />
+                <button
+                  type='submit'
+                  onClick={addNewTagHandler}
+                  className='w-4/12 py-2 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
+                >
+                  Add tags
+                </button>
+              </div>
+              <div className='w-7/12 h-8 mt-5 flex justify-start items-center text-main-black'>
+                <label className='opacity-70 text-white'>Tag: </label>
+                {tagsValue.map((tag, i) => {
+                  return (
+                    <div
+                      value={tag}
+                      key={i}
+                      className='ml-2 py-1 pl-2 pr-3 bg-white leading-relaxed rounded-xl text-xs'
+                    >
+                      <span
+                        onClick={() => setTagsValue([])}
+                        className=' mr-1.5 px-1 pb-0.5 text-sm font-bold hover:bg-red-200 rounded-full transition ease-in duration-200 cursor-pointer'
+                      >
+                        ×
+                      </span>
+                      {URL ? tag : location.state.note.tags}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
