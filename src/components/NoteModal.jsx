@@ -65,14 +65,20 @@ const NoteModal = ({
     setPlacesPreview('');
   };
 
-  //  new tag handler
-  const addNewTagHandler = (e) => {
+  // add a new tag
+  const addNewTagHandler = (e, tags) => {
     e.preventDefault();
 
-    if (inputTags.length) {
-      setTagsValue((prevState) => [...prevState, inputTags]);
+    if (tags) {
+      setTagsValue([...tagsValue, { id_tag: new Date().getTime(), tags }]);
     }
     setInputTags('');
+  };
+
+  // delete tag handler
+  const deleteTagHandler = (id_tag) => {
+    const filteredTag = tagsValue.filter((tag) => tag.id_tag !== id_tag);
+    setTagsValue(filteredTag);
   };
 
   return (
@@ -220,36 +226,34 @@ const NoteModal = ({
                   maxLength='20'
                   value={inputTags}
                   onChange={(e) => setInputTags(e.target.value)}
-                  placeholder='note tags...'
-                  className='w-9/12 py-2 px-3 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                  placeholder='new tag...'
+                  className='w-9/12 py-3 px-3 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                 />
                 <button
                   type='submit'
-                  onClick={addNewTagHandler}
-                  className='w-4/12 py-2 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
+                  onClick={(e) => addNewTagHandler(e, inputTags)}
+                  className='w-4/12 py-3 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
                 >
-                  Add tags
+                  Add tag
                 </button>
               </div>
               <div className='w-7/12 h-8 mt-5 flex justify-start items-center text-main-black'>
-                <label className='opacity-70 text-white'>Tag: </label>
-                {tagsValue.map((tag, i) => {
-                  return (
-                    <div
-                      value={tag}
-                      key={i}
-                      className='ml-2 py-1 pl-2 pr-3 bg-white leading-relaxed rounded-xl text-xs'
+                <label className='opacity-70 text-white'>New tag: </label>
+                {tagsValue.map((tag) => (
+                  <div
+                    value={tag.tags}
+                    key={tag.id_tag}
+                    className='ml-2 py-1 pl-2 pr-3 bg-white leading-relaxed rounded-xl text-xs'
+                  >
+                    <span
+                      onClick={() => deleteTagHandler(tag.id_tag)}
+                      className=' mr-1.5 px-1 pb-0.5 text-sm font-bold hover:bg-red-200 rounded-full transition ease-in duration-200 cursor-pointer'
                     >
-                      <span
-                        onClick={() => setTagsValue([])}
-                        className=' mr-1.5 px-1 pb-0.5 text-sm font-bold hover:bg-red-200 rounded-full transition ease-in duration-200 cursor-pointer'
-                      >
-                        ×
-                      </span>
-                      {URL ? tag : location.state.note.tags}
-                    </div>
-                  );
-                })}
+                      ×
+                    </span>
+                    {URL ? tag.tags : location.state.note.tags.tags}
+                  </div>
+                ))}
               </div>
             </div>
           </div>

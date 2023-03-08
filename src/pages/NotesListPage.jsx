@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NoteItem from '../components/NoteItem';
+import TagItem from '../components/TagItem';
 import { getAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
@@ -18,17 +19,15 @@ const NotesListPage = () => {
   return (
     <Layout>
       <div className=''>There are {notes.length} more notes left</div>
+
       {/* tags */}
-      <select name='tags' id='tags' className='text-black'>
+      <select name='tags' id='tags' className='text-black w-28'>
         <option value=''>All</option>
-        {notes.map((task, i) => {
-          return (
-            <option value={task.tags} key={i}>
-              {task.tags}
-            </option>
-          );
-        })}
+        {notes.map((note) => (
+          <TagItem key={note.id} {...note} />
+        ))}
       </select>
+
       {/* note list */}
       <div className=' w-screen flex flex-col items-center'>
         <ul className='my-16 h-96 w-2/6 px-3 overflow-auto'>
