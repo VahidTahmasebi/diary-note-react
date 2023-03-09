@@ -20,6 +20,7 @@ export const addAsyncNotes = createAsyncThunk(
     try {
       const response = await axios.post('http://localhost:9000/notes', {
         id: Date.now(),
+        createAt: new Date().toLocaleString(),
         subject: payload.subject,
         textarea: payload.textarea,
         checklist: payload.checklist,

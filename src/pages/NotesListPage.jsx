@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import FilterNotes from '../components/FilterNotes';
 import NoteItem from '../components/NoteItem';
-import TagItem from '../components/TagItem';
 import { getAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
 const NotesListPage = () => {
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
   const { notes, loading, error } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
 
@@ -18,23 +20,20 @@ const NotesListPage = () => {
 
   return (
     <Layout>
-      <div className=''>There are {notes.length} more notes left</div>
+      <div>
+        <div className=''>There are {notes.length} more notes left</div>
 
-      {/* tags */}
-      <select name='tags' id='tags' className='text-black w-28'>
-        <option value=''>All</option>
-        {notes.map((note) => (
-          <TagItem key={note.id} {...note} />
-        ))}
-      </select>
+        {/* filter component */}
+        <FilterNotes notes={notes} setFilteredProducts={setFilteredProducts} />
 
-      {/* note list */}
-      <div className=' w-screen flex flex-col items-center'>
-        <ul className='my-16 h-96 w-2/6 px-3 overflow-auto'>
-          {notes.map((note) => (
-            <NoteItem key={note.id} {...note} />
-          ))}
-        </ul>
+        {/* note list */}
+        <div className=' w-screen flex flex-col items-center'>
+          <ul className='my-16 h-96 w-2/6 px-3 overflow-auto'>
+            {filteredProducts.map((note) => (
+              <NoteItem key={note.id} {...note} />
+            ))}
+          </ul>
+        </div>
       </div>
     </Layout>
   );
