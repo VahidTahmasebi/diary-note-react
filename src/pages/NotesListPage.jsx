@@ -20,15 +20,22 @@ const NotesListPage = () => {
 
   return (
     <Layout>
-      <div>
-        <div className=''>There are {notes.length} more notes left</div>
+      <div className='w-6/12 flex justify-center'>
+        <div className='w-4/6 flex flex-col items-center'>
+          {/* filter component */}
+          <FilterNotes
+            notes={notes}
+            setFilteredProducts={setFilteredProducts}
+          />
 
-        {/* filter component */}
-        <FilterNotes notes={notes} setFilteredProducts={setFilteredProducts} />
+          <div className='w-11/12'>
+            <span className='text-left text-slate-400'>
+              There are {notes.length} notes available
+            </span>
+          </div>
 
-        {/* note list */}
-        <div className=' w-screen flex flex-col items-center'>
-          <ul className='my-16 h-96 w-2/6 px-3 overflow-auto'>
+          {/* note list */}
+          <ul className='w-full h-96 px-3 overflow-auto'>
             {filteredProducts.map((note) => (
               <NoteItem key={note.id} {...note} />
             ))}
