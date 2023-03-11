@@ -36,7 +36,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
               })`,
               height: `${!URL_NOTES_LIST ? '160px' : '96px'}`,
             }}
-            className='h-40 lg:w-4/6 w-full bg-cover bg-opacity-95 bg-blend-multiply relative bg-main-grey rounded-bl-full rounded-br-full'
+            className='lg:w-[1024px] w-full bg-cover bg-opacity-95 bg-blend-multiply relative bg-main-grey rounded-bl-full rounded-br-full'
           >
             {/* profile */}
             <div className='flex justify-start items-center my-4 mx-9'>
@@ -58,7 +58,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
               </div>
               <p className='ml-3'>Guest</p>
             </div>
-            
+
             {/* button */}
             {!URL_NOTES_LIST && (
               <div className='mb-3'>

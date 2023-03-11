@@ -13,7 +13,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <div className='bg-body-color text-white h-screen overflow-hidden overflow-y-auto p-0 m-0 box-border'>
+        <div className='h-full min-h-screen m-0 p-0 box-border bg-body-color text-white overflow-hidden'>
           <Routes>
             <Route path='/' element={<MainPage />} />
             <Route path='/login' element={<LoginPage />} />

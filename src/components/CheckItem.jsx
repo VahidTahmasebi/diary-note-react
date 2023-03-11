@@ -4,20 +4,20 @@ const CheckItem = ({ deleteCheckHandler, ...item }) => {
   const { id_check, check } = item;
 
   return (
-    <li className='flex items-center lg:w-full h-fit max-h-20 mb-2 rounded-xl shadow-lg hover:ring-1 hover:ring-offset-1 hover:ring-indigo-200 transition ease-in duration-200'>
+    <li className='lg:w-full flex items-center mb-2 rounded-xl shadow-lg hover:ring-1 hover:ring-offset-1 hover:ring-indigo-200 transition ease-in duration-200'>
       <label
         htmlFor={id_check}
-        className='flex px-5 py-3 h-full items-center overflow-hidden overflow-x-auto flex-1 cursor-pointer'
+        className='flex flex-1 items-center px-5 py-3 overflow-x-auto cursor-pointer'
       >
         <input
           type='checkbox'
           id={id_check}
           name='checklist'
-          className='opacity-0 absolute cursor-pointer'
+          className='opacity-0 cursor-pointer'
         />
-        <div className='bg-white border-2 rounded-md border-primary-color w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-primary-color'>
+        <div className='w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 border-2 border-primary-color focus-within:border-primary-color rounded-md bg-white'>
           <svg
-            className='fill-current hidden w-2 h-2 text-primary-color pointer-events-none'
+            className='w-2 h-2 fill-current hidden text-primary-color pointer-events-none'
             version='1.1'
             viewBox='0 0 17 12'
             xmlns='http://www.w3.org/2000/svg'
