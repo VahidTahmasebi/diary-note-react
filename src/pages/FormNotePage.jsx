@@ -48,7 +48,7 @@ const FormNotePage = () => {
     if (check) {
       setListChecklist([
         ...listChecklist,
-        { id_check: new Date().getTime(), check: check },
+        { id_check: new Date().getTime(), check: check, completed: false },
       ]);
     }
 
@@ -104,6 +104,17 @@ const FormNotePage = () => {
     }
   };
 
+  // complete check handler
+  const completeCheckHandler = (id_check) => {
+    const filterCheck = [...listChecklist].map((item) => {
+      if (item.id_check == id_check) {
+        item.completed = !item.completed;
+      }
+      return item;
+    });
+    setListChecklist(filterCheck);
+  };
+
   // delete checklist item
   const deleteCheckHandler = (e, id_check) => {
     e.preventDefault();
@@ -129,6 +140,7 @@ const FormNotePage = () => {
           tagsValue={tagsValue}
           setTagsValue={setTagsValue}
         />
+
         <form onSubmit={onSubmit} className='w-screen flex justify-center'>
           {/* main */}
           <div className='lg:w-[768px] w-10/12 flex flex-col-reverse md:flex-row justify-between items-center md:items-start my-10'>
@@ -202,6 +214,7 @@ const FormNotePage = () => {
                       key={item.id_check}
                       {...item}
                       deleteCheckHandler={deleteCheckHandler}
+                      completeCheckHandler={completeCheckHandler}
                     />
                   ))}
                 </ul>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CheckItem = ({ deleteCheckHandler, ...item }) => {
+const CheckItem = ({ completeCheckHandler, deleteCheckHandler, ...item }) => {
   const { id_check, check } = item;
 
   return (
@@ -14,6 +14,7 @@ const CheckItem = ({ deleteCheckHandler, ...item }) => {
           id={id_check}
           name='checklist'
           className='opacity-0 cursor-pointer'
+          onChange={() => completeCheckHandler(id_check)}
         />
         <div className='w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 border-2 border-primary-color focus-within:border-primary-color rounded-md bg-white'>
           <svg
