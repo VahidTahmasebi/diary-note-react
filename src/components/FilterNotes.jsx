@@ -46,10 +46,10 @@ const FilterNotes = ({ notes, setFilteredProducts }) => {
   };
 
   return (
-    <div className='w-11/12 flex justify-evenly items-center my-10'>
+    <div className='md:w-9/12 flex flex-col md:flex-row justify-evenly items-center my-10'>
       {/* search list */}
-      <div className='flex flex-col'>
-        <label htmlFor='searchInput' className='text-slate-400 mb-0.5'>
+      <div className='w-full md:w-44 flex flex-col'>
+        <label htmlFor='searchInput' className='opacity-70 mb-0.5'>
           Search
         </label>
         <input
@@ -60,13 +60,13 @@ const FilterNotes = ({ notes, setFilteredProducts }) => {
           onChange={searchHandler}
           maxLength='30'
           placeholder='note search'
-          className=' w-44 p-2 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+          className='p-2 text-main-white placeholder:text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
         />
       </div>
 
       {/* sort */}
-      <div className='flex flex-col'>
-        <label htmlFor='sort-products' className='text-slate-400'>
+      <div className='md:w-24 w-full flex flex-col my-3 md:my-0'>
+        <label htmlFor='sort-products' className='opacity-70'>
           Sort
         </label>
         <select
@@ -74,7 +74,7 @@ const FilterNotes = ({ notes, setFilteredProducts }) => {
           id='sort-products'
           value={sort}
           onChange={({ target }) => setSort(target.value)}
-          className='lg:w-full p-2 text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+          className='p-2 text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
         >
           <option value='latest'>latest</option>
           <option value='earliest'>earliest</option>
@@ -82,8 +82,8 @@ const FilterNotes = ({ notes, setFilteredProducts }) => {
       </div>
 
       {/* tags */}
-      <div className='flex flex-col'>
-        <label htmlFor='sort-products' className='text-slate-400 mb-0.5'>
+      <div className='w-full md:w-40 flex flex-col'>
+        <label htmlFor='sort-products' className='opacity-70 mb-0.5'>
           Tags
         </label>
         <select
@@ -91,7 +91,7 @@ const FilterNotes = ({ notes, setFilteredProducts }) => {
           id='tags'
           value={selectedTag}
           onChange={({ target }) => setSelectedTag(target.value)}
-          className=' w-44 p-2 text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+          className='p-2 text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
         >
           <option value='' className=' mt-20'>
             all
