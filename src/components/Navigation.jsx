@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
 const Navigation = ({ noteValues, setNoteValues }) => {
   const URL_NOTES_LIST =
     window.location.href === 'http://localhost:8080/notes-list';
   const URL = 'http://localhost:8080/new-note';
   const pathname = window.location.href;
   const location = useLocation();
+
   const [userLogin, setUserLogin] = useState(null);
 
   // get local storage values
@@ -78,7 +80,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
             </div>
 
             {/* button */}
-            {!URL_NOTES_LIST && (
+            {!URL_NOTES_LIST ? (
               <div className='mb-3'>
                 <input
                   type='file'
@@ -95,6 +97,15 @@ const Navigation = ({ noteValues, setNoteValues }) => {
                   Cover
                 </label>
               </div>
+            ) : (
+              <Link to='/new-note' className='mb-3'>
+                <label
+                  htmlFor='file'
+                  className='absolute -bottom-4 right-44 py-2 px-4 rounded-full bg-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
+                >
+                  New note
+                </label>
+              </Link>
             )}
           </div>
         </div>
