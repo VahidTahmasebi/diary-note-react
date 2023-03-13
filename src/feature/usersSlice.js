@@ -25,6 +25,7 @@ export const signupAsyncUsers = createAsyncThunk(
         name: payload.name,
         email: payload.email,
         password: payload.password,
+        profileImage: payload.profileImage,
       });
       console.log(response.data);
       return response.data;

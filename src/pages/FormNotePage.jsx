@@ -91,7 +91,7 @@ const FormNotePage = () => {
         timeValue: null,
         placeValue: null,
       });
-      navigate('/notes-list');
+      navigate('/login?redirect=/notes-list');
     }
   };
 
@@ -346,7 +346,7 @@ const FormNotePage = () => {
               <div className='text-center'>
                 <button
                   type='submit'
-                  className=' py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
+                  className='py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
                 >
                   Add note
                 </button>

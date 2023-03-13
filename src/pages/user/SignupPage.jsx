@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../../common/Input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { singupAsyncUsers } from '../../feature/usersSlice';
+import { signupAsyncUsers } from '../../feature/usersSlice';
+import { useQuery } from '../../hooks/useQuery';
 
 const initialValues = {
   name: '',
@@ -33,17 +34,42 @@ const validationSchema = Yup.object({
 
 const SignupPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [userLogin, setUserLogin] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
+  console.log(profileImage);
+  const query = useQuery();
+  const redirect = query.get('redirect') || '/';
+
+  // if the user is logged in, move to the next page
+  useEffect(() => {
+    if (userLogin) navigate(redirect);
+  }, [redirect, userLogin]);
+
+  // profileImage handler
+  const coverSelectHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProfileImage(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   const onSubmit = (values) => {
     const { name, email, password } = values;
 
     dispatch(
-      singupAsyncUsers({
+      signupAsyncUsers({
+        id: Date.now(),
         name,
         email,
         password,
+        profileImage,
       })
     );
+    navigate(redirect);
   };
 
   const formik = useFormik({
@@ -55,10 +81,10 @@ const SignupPage = () => {
 
   return (
     <div className='h-screen w-screen flex flex-col justify-center items-center gap-y-14'>
-      <h2>Let's create your account</h2>
+      <h2 className='text-lg'>Let's create your account</h2>
       <form
         onSubmit={formik.handleSubmit}
-        className='w-screen flex flex-col justify-center items-center gap-y-5'
+        className='w-screen flex flex-col justify-center items-center gap-y-3'
       >
         <Input formik={formik} name='name' label='Name' />
         <Input formik={formik} name='email' label='Email' type='email' />
@@ -74,10 +100,44 @@ const SignupPage = () => {
           label='Password confirmation'
           type='password'
         />
-        <button type='submit'>Signup</button>
+
+        {/* cover button */}
+        <div className='mb-3'>
+          <input
+            type='file'
+            accept='.jpg, .jpeg, .png'
+            name='image-upload'
+            id='file'
+            disabled
+            onChange={coverSelectHandler}
+            className='opacity-0 w-0.5 h-0.5 '
+          />
+          <label
+            htmlFor='file'
+            className='py-2 px-4 rounded-full bg-gray-400 text-base font-semibold shadow-md outline-none cursor-not-allowed'
+            // className="hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 "
+          >
+            Avatar
+          </label>
+        </div>
+
+        <button
+          type='submit'
+          disabled
+          className='py-2 px-4 rounded-full bg-gray-400 text-base font-semibold shadow-md outline-none cursor-not-allowed'
+          // className='py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
+        >
+          Signup
+        </button>
       </form>
       <p>
-        Already have an account? <Link>Sign in</Link>
+        Already have an account?{' '}
+        <Link
+          to={`/login?redirect=${redirect}`}
+          className='text-primary-color hover:text-primary-color-hover transition ease-in duration-200 text-base font-semibold '
+        >
+          Login
+        </Link>
       </p>
     </div>
   );

@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/styles/index.css';
 
 const MainPage = () => {
+  const [userLogin, setUserLogin] = useState(null);
+
+  // get local storage values
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('authState')) || false;
+    setUserLogin(userData);
+  }, []);
+
   return (
     <section className='flex flex-col w-full h-screen overflow-auto justify-center items-center'>
       <div className='text-center my-auto'>
@@ -15,7 +23,7 @@ const MainPage = () => {
             Get Started
           </button>
         </Link>
-        <p>welcome user - dynamic</p>
+        {userLogin && <p>Welcome {userLogin.name}</p>}
       </div>
     </section>
   );
