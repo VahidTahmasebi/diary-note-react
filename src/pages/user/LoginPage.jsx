@@ -6,6 +6,7 @@ import { getAsyncUsers } from '../../feature/usersSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '../../hooks/useQuery';
+import { toast } from 'react-hot-toast';
 
 const initialValues = {
   email: 'BrendanEich@diaryNote.com',
@@ -59,7 +60,23 @@ const LoginPage = () => {
       // store local values
       localStorage.setItem('authState', JSON.stringify(userLogin));
       if (userLogin) {
+        toast.success(`Welcome ${userLogin.name}`, {
+          style: {
+            borderRadius: '10px',
+            background: '#374151',
+            color: '#fff',
+          },
+        });
+
         navigate('/notes-list');
+      } else {
+        toast.error('Try again', {
+          style: {
+            borderRadius: '10px',
+            background: '#374151',
+            color: '#fff',
+          },
+        });
       }
     }
   };

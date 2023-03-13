@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signupAsyncUsers } from '../../feature/usersSlice';
 import { useQuery } from '../../hooks/useQuery';
+import { toast } from 'react-hot-toast';
 
 const initialValues = {
   name: '',
@@ -37,7 +38,6 @@ const SignupPage = () => {
   const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
-  console.log(profileImage);
   const query = useQuery();
   const redirect = query.get('redirect') || '/';
 
@@ -69,6 +69,13 @@ const SignupPage = () => {
         profileImage,
       })
     );
+    toast.success('Register successfully', {
+      style: {
+        borderRadius: '10px',
+        background: '#374151',
+        color: '#fff',
+      },
+    });
     navigate(redirect);
   };
 

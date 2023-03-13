@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CheckItem from '../components/CheckItem';
@@ -82,6 +83,13 @@ const FormNotePage = () => {
           tags: tagsValue,
         })
       );
+      toast.success('Added note', {
+        style: {
+          borderRadius: '10px',
+          background: '#374151',
+          color: '#fff',
+        },
+      });
       setNoteValues({
         subjectValue: '',
         textareaValue: '',
