@@ -12,7 +12,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <section className='flex flex-col w-full h-screen overflow-auto justify-center items-center'>
+    <section className='w-full h-screen flex flex-col justify-center items-center overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'>
       <div className=''>
         <img
           src={require('../assets/images/main_image.png')}
