@@ -29,9 +29,13 @@ const NotesListPage = () => {
           />
 
           <div className='w-11/12 md:w-9/12'>
-            <span className='text-left opacity-70'>
-              There are {notes.length} notes available
-            </span>
+            {notes.length ? (
+              <span className='text-left opacity-70'>
+                There are {notes.length} notes available
+              </span>
+            ) : (
+              ''
+            )}
 
             {/* note list */}
             <ul className='max-h-96 mt-1 px-3 rounded-xl bg-gray-700 shadow-lg overflow-auto'>

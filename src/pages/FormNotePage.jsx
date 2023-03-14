@@ -151,8 +151,8 @@ const FormNotePage = () => {
 
         <form onSubmit={onSubmit} className='w-screen flex justify-center'>
           {/* main */}
-          <div className='lg:w-[768px] w-10/12 flex flex-col-reverse md:flex-row justify-between items-center md:items-start my-10'>
-            <div className='w-full md:w-5/6 flex flex-col justify-center'>
+          <div className='lg:w-[768px] md:w-8/12 w-10/12 flex flex-col-reverse md:flex-row justify-between items-center md:items-start my-10 transition-all duration-100 ease-in'>
+            <div className='w-full md:w-5/6 flex flex-col justify-center  transition-all duration-100 ease-in'>
               {/* subject */}
               <div className='flex flex-col w-full md:w-5/6'>
                 <label htmlFor='subjectValue' className='opacity-70 mb-1'>
@@ -193,11 +193,11 @@ const FormNotePage = () => {
 
               {/* checklist form */}
               <div className='md:w-5/6 w-full'>
-                <label htmlFor='checklist' className='opacity-70 mb-1'>
+                <label htmlFor='checklist' className='opacity-70'>
                   Checklist
                 </label>
 
-                <ul className='flex flex-col w-full max-h-80 p-3 rounded-xl bg-gray-700 shadow-lg transition ease-in duration-200 overflow-y-auto'>
+                <ul className='flex flex-col w-full max-h-80 mt-1 p-3 rounded-xl bg-gray-700 shadow-lg transition ease-in duration-200 overflow-y-auto'>
                   <div className='flex mb-4'>
                     <input
                       type='text'
@@ -233,7 +233,7 @@ const FormNotePage = () => {
             <div className='w-full md:w-fit h-56'>
               <div className='opacity-70 mb-0.5'>Add to card</div>
               <div className=' flex flex-col justify-start items-center'>
-                <ul className='md:h-56 w-full md:w-40 flex md:flex-col justify-around items-start px-4 py-3 bg-gray-700 rounded-xl text-main-white'>
+                <ul className='md:h-56 w-full md:w-40 flex md:flex-col justify-around items-start px-4 py-3 bg-gray-700 rounded-xl text-main-white transition-all duration-100 ease-in'>
                   {/* Progress */}
                   <li
                     onClick={() =>

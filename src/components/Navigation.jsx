@@ -49,7 +49,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
           >
             {/* profile */}
             <div className='flex justify-start items-center my-4 mx-9'>
-              <div className='w-10 h-10 flex justify-center items-center mr-2 rounded-full border-2 border-indigo-200 bg-gray-400'>
+              <div className='w-10 h-10 flex justify-center items-center mr-2 ml-7 rounded-full border-2 border-indigo-200 bg-gray-400'>
                 {userLogin ? (
                   <div
                     className='w-9 h-9 rounded-full bg-cover'
@@ -81,7 +81,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
 
             {/* button */}
             {!URL_NOTES_LIST ? (
-              <div className='mb-3'>
+              <div className='mb-3 flex justify-center items-center'>
                 <input
                   type='file'
                   accept='.jpg, .jpeg, .png'
@@ -92,16 +92,19 @@ const Navigation = ({ noteValues, setNoteValues }) => {
                 />
                 <label
                   htmlFor='file'
-                  className='absolute -bottom-4 right-44 py-2 px-4 rounded-full bg-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
+                  className='absolute -bottom-4 md:right-44 py-2 px-4 rounded-full bg-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
                 >
                   Cover
                 </label>
               </div>
             ) : (
-              <Link to='/new-note' className='mb-3'>
+              <Link
+                to='/new-note'
+                className='mb-3 flex justify-center items-center'
+              >
                 <label
                   htmlFor='file'
-                  className='absolute -bottom-4 right-44 py-2 px-4 rounded-full bg-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
+                  className='absolute -bottom-4 md:right-44 py-2 px-4 rounded-full bg-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
                 >
                   New note
                 </label>
