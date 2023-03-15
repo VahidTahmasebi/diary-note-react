@@ -20,8 +20,8 @@ const NotesListPage = () => {
 
   return (
     <Layout>
-      <div className='w-screen flex justify-center'>
-        <div className='lg:w-[768px] w-10/12  flex flex-col items-center'>
+      <div className='w-screen flex justify-center my-10'>
+        <div className='lg:w-[768px] w-10/12 flex flex-col items-center'>
           {/* filter component */}
           <FilterNotes
             notes={notes}

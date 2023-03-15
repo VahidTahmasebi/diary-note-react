@@ -38,6 +38,20 @@ export const addAsyncNotes = createAsyncThunk(
   }
 );
 
+// delete async note from note list
+export const deleteAsyncNote = createAsyncThunk(
+  'notes/deleteAsyncNote',
+  async (payload, { rejectWithValue }) => {
+    try {
+      await axios.delete(`http://localhost:9000/notes/${payload.id}`);
+
+      return { id: payload.id };
+    } catch (error) {
+      return rejectWithValue([], error);
+    }
+  }
+);
+
 // store state
 const initialState = {
   notes: [],
@@ -61,6 +75,9 @@ const notesSlice = createSlice({
     },
     [addAsyncNotes.fulfilled]: (state, action) => {
       state.notes.push(action.payload);
+    },
+    [deleteAsyncNote.fulfilled]: (state, action) => {
+      state.notes = state.notes.filter((note) => note.id !== action.payload.id);
     },
   },
 });

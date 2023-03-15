@@ -46,7 +46,7 @@ const FilterNotes = ({ notes, setFilteredProducts }) => {
   };
 
   return (
-    <div className='md:w-9/12 flex flex-col md:flex-row justify-evenly items-center my-10'>
+    <div className='md:w-9/12 flex flex-col md:flex-row justify-evenly items-center mb-10'>
       {/* search list */}
       <div className='w-full md:w-44 flex flex-col'>
         <label htmlFor='searchInput' className='opacity-70 mb-0.5'>
