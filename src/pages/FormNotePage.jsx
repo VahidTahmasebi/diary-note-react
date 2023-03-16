@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CheckItem from '../components/CheckItem';
 import NoteModal from '../components/NoteModal';
 import { addAsyncNotes } from '../feature/notesSlice';
@@ -17,12 +17,12 @@ const FormNotePage = () => {
     timeValue: false,
     placeValue: '',
   });
-
   // tags state
   const [tagsValue, setTagsValue] = useState([]);
   // checklist state
   const [inputChecklist, setInputChecklist] = useState('');
   const [listChecklist, setListChecklist] = useState([]);
+
   // module state
   const [modalState, setModalState] = useState({
     progressModal: false,
@@ -33,9 +33,6 @@ const FormNotePage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  // address of the current page
-  const URL = window.location.href === 'http://localhost:8080/new-note';
 
   // change form handler
   const changeHandler = ({ target }) => {
@@ -58,13 +55,33 @@ const FormNotePage = () => {
 
   // select progress handler
   const selectProgressHandler = (selectedProgress) => {
-    // setNoteValues(value);
     setNoteValues({ ...noteValues, progressValue: selectedProgress });
+  };
+
+  // complete check handler
+  const completeCheckHandler = (id_check) => {
+    setListChecklist(
+      listChecklist.map((item) =>
+        item.id_check === id_check
+          ? { ...item, completed: !item.completed }
+          : item
+      )
+    );
+  };
+
+  // delete checklist item
+  const deleteCheckHandler = (e, id_check) => {
+    e.preventDefault();
+    const filteredCheck = listChecklist.filter(
+      (check) => check.id_check !== id_check
+    );
+    setListChecklist(filteredCheck);
   };
 
   // send values
   // clear entries
   // move to the note list page
+  // notify
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -83,6 +100,7 @@ const FormNotePage = () => {
           tags: tagsValue,
         })
       );
+
       toast.success('Added note', {
         style: {
           borderRadius: '10px',
@@ -90,6 +108,7 @@ const FormNotePage = () => {
           color: '#fff',
         },
       });
+
       setNoteValues({
         subjectValue: '',
         textareaValue: '',
@@ -99,37 +118,17 @@ const FormNotePage = () => {
         timeValue: null,
         placeValue: null,
       });
+
       navigate('/login?redirect=/notes-list');
-    }
-  };
-
-  // the checklist is going to be mapped
-  const checklistURL = () => {
-    if (URL) {
-      return listChecklist;
     } else {
-      return location.state.note.checklist;
+      toast.error('The subject value is empty', {
+        style: {
+          borderRadius: '10px',
+          background: '#374151',
+          color: '#fff',
+        },
+      });
     }
-  };
-
-  // complete check handler
-  const completeCheckHandler = (id_check) => {
-    const filterCheck = [...listChecklist].map((item) => {
-      if (item.id_check == id_check) {
-        item.completed = !item.completed;
-      }
-      return item;
-    });
-    setListChecklist(filterCheck);
-  };
-
-  // delete checklist item
-  const deleteCheckHandler = (e, id_check) => {
-    e.preventDefault();
-    const filteredCheck = listChecklist.filter(
-      (check) => check.id_check !== id_check
-    );
-    setListChecklist(filteredCheck);
   };
 
   // option list className
@@ -151,7 +150,7 @@ const FormNotePage = () => {
 
         <form onSubmit={onSubmit} className='w-screen flex justify-center'>
           {/* main */}
-          <div className='lg:w-[768px] md:w-8/12 w-10/12 flex flex-col-reverse md:flex-row justify-between items-center md:items-start my-10 transition-all duration-100 ease-in'>
+          <div className='w-10/12 md:w-8/12 lg:w-[768px] flex flex-col-reverse md:flex-row justify-between items-center md:items-start my-10 transition-all duration-100 ease-in'>
             <div className='w-full md:w-5/6 flex flex-col justify-center transition-all duration-100 ease-in'>
               {/* subject */}
               <div className='w-full md:w-5/6 flex flex-col'>
@@ -162,9 +161,7 @@ const FormNotePage = () => {
                   type='subjectValue'
                   id='subjectValue'
                   name='subjectValue'
-                  value={
-                    URL ? noteValues.subjectValue : location.state.note.subject
-                  }
+                  value={noteValues.subjectValue}
                   onChange={changeHandler}
                   maxLength='25'
                   placeholder='your subject...'
@@ -180,11 +177,7 @@ const FormNotePage = () => {
                 <textarea
                   className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                   placeholder='your note...'
-                  value={
-                    URL
-                      ? noteValues.textareaValue
-                      : location.state.note.textarea
-                  }
+                  value={noteValues.textareaValue}
                   id='textareaValue'
                   name='textareaValue'
                   onChange={changeHandler}
@@ -217,7 +210,7 @@ const FormNotePage = () => {
                     </button>
                   </div>
 
-                  {checklistURL().map((item) => (
+                  {listChecklist.map((item) => (
                     <CheckItem
                       key={item.id_check}
                       {...item}

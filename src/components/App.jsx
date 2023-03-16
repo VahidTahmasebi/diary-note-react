@@ -8,20 +8,21 @@ import FormNotePage from '../pages/FormNotePage';
 import SignupPage from '../pages/user/SignupPage';
 import LoginPage from '../pages/user/LoginPage';
 import toast, { Toaster } from 'react-hot-toast';
+import EditNote from '../pages/EditNote';
 
 const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Toaster />
-        <div className='h-full min-h-screen m-0 p-0 box-border bg-body-color text-white overflow-hidden'>
+        <div className='min-h-screen m-0 p-0 box-border bg-body-color text-white overflow-hidden'>
           <Routes>
             <Route path='/' element={<MainPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/new-note' element={<FormNotePage />} />
             <Route path='/notes-list' element={<NotesListPage />} />
-            <Route path='/note/:id' element={<FormNotePage />} />
+            <Route path='/note/:id' element={<EditNote />} />
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,8 +1,8 @@
 import React from 'react';
 
 const CheckItem = ({ completeCheckHandler, deleteCheckHandler, ...item }) => {
-  const { id_check, check } = item;
-
+  const { id_check, check, completed } = item;
+  
   return (
     <li className='lg:w-full flex items-center mb-2 rounded-xl shadow-lg hover:ring-1 hover:ring-offset-1 hover:ring-indigo-200 transition ease-in duration-200'>
       <label
@@ -12,6 +12,7 @@ const CheckItem = ({ completeCheckHandler, deleteCheckHandler, ...item }) => {
         <input
           type='checkbox'
           id={id_check}
+          checked={completed}
           name='checklist'
           className='opacity-0 cursor-pointer'
           onChange={() => completeCheckHandler(id_check)}

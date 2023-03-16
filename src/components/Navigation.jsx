@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = ({ noteValues, setNoteValues }) => {
+  const [userLogin, setUserLogin] = useState(null);
+  
   const URL_NOTES_LIST =
     window.location.href === 'http://localhost:8080/notes-list';
-  const URL = 'http://localhost:8080/new-note';
-  const pathname = window.location.href;
-  const location = useLocation();
 
-  const [userLogin, setUserLogin] = useState(null);
 
   // get local storage values
   useEffect(() => {
@@ -35,13 +33,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
           <div
             style={{
               backgroundImage: `url(${
-                pathname === URL
-                  ? noteValues.coverValue
-                  : URL_NOTES_LIST
-                  ? ''
-                  : location.pathname
-                  ? location.state.note.cover
-                  : ''
+                !URL_NOTES_LIST && noteValues.coverValue
               })`,
               height: `${!URL_NOTES_LIST ? '160px' : '96px'}`,
             }}

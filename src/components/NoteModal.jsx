@@ -30,11 +30,9 @@ const NoteModal = ({
     { label: '🥳 - %100', value: 'progress100' },
   ];
 
-  const location = useLocation();
   const dispatch = useDispatch();
-  // address of the current page
-  const URL = window.location.href === 'http://localhost:8080/new-note';
 
+  // get cities
   useEffect(() => {
     dispatch(getAsyncCities());
   }, []);
@@ -91,9 +89,7 @@ const NoteModal = ({
         >
           <div onClick={(e) => e.stopPropagation()} className='flex flex-col'>
             <Select
-              value={
-                URL ? noteValues.progressValue : location.state.note.progress
-              }
+              value={noteValues.progressValue}
               onChange={selectProgressHandler}
               options={selectedOptions}
               placeholder='progress...'
@@ -154,14 +150,14 @@ const NoteModal = ({
             <input
               type='date'
               name='dateValue'
-              value={URL ? noteValues.dateValue : location.state.note.date}
+              value={noteValues.dateValue}
               onChange={changeHandler}
               className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
             />
             <input
               type='time'
               name='timeValue'
-              value={URL ? noteValues.timeValue : location.state.note.time}
+              value={noteValues.timeValue}
               onChange={changeHandler}
               className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
             />
@@ -206,7 +202,7 @@ const NoteModal = ({
                 'w-72 h-fit p-3 text-main-black bg-main-white rounded-xl'
               }
             >
-              {URL ? noteValues.placeValue : location.state.note.place}
+              {noteValues.placeValue}
             </div>
           </div>
         </div>
@@ -251,7 +247,7 @@ const NoteModal = ({
                     >
                       ×
                     </span>
-                    {URL ? tag.tags : location.state.note.tags.tags}
+                    {tag.tags}
                   </div>
                 ))}
               </div>
