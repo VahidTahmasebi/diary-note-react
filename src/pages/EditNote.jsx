@@ -11,7 +11,7 @@ import {
 } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
-const FormNotePage = () => {
+const FormNotePage = ({ ...props }) => {
   const [noteValues, setNoteValues] = useState({
     subjectValue: '',
     textareaValue: '',
@@ -21,8 +21,7 @@ const FormNotePage = () => {
     timeValue: false,
     placeValue: '',
   });
-  // tags state
-  const [tagsValue, setTagsValue] = useState([]);
+
   // checklist state
   const [inputChecklist, setInputChecklist] = useState('');
   const [listChecklist, setListChecklist] = useState([]);
@@ -54,7 +53,7 @@ const FormNotePage = () => {
           placeValue: res.payload.place,
         });
         setListChecklist(res.payload.checklist);
-        setTagsValue(res.payload.tags);
+        props.setSelectedTags(res.payload.tags);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -122,10 +121,12 @@ const FormNotePage = () => {
           date: noteValues.dateValue,
           time: noteValues.timeValue,
           place: noteValues.placeValue,
-          tags: tagsValue,
+          tags: props.selectedTags,
         })
       );
       dispatch(getAsyncNotes());
+
+      props.setSelectedTags([]);
 
       toast.success('Edit done', {
         style: {
@@ -160,8 +161,7 @@ const FormNotePage = () => {
           noteValues={noteValues}
           setNoteValues={setNoteValues}
           selectProgressHandler={selectProgressHandler}
-          tagsValue={tagsValue}
-          setTagsValue={setTagsValue}
+          {...props}
         />
 
         <form onSubmit={onSubmit} className='w-screen flex justify-center'>

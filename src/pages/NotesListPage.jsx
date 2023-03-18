@@ -5,12 +5,13 @@ import NoteItem from '../components/NoteItem';
 import { getAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
-const NotesListPage = () => {
+const NotesListPage = ({ ...props }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const { notes, loading, error } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
 
+  // get the data of all the notes
   useEffect(() => {
     dispatch(getAsyncNotes());
   }, []);
@@ -26,6 +27,7 @@ const NotesListPage = () => {
           <FilterNotes
             notes={notes}
             setFilteredProducts={setFilteredProducts}
+            {...props}
           />
 
           <div className='w-11/12 md:w-9/12'>

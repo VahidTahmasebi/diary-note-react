@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import { getAsyncCities } from '../feature/citiesSlice';
+import CreatableSelect from 'react-select/creatable';
+import { styleSelector } from './App';
+import makeAnimated from 'react-select/animated';
 
 const NoteModal = ({
   modalState,
@@ -11,26 +13,26 @@ const NoteModal = ({
   noteValues,
   setNoteValues,
   selectProgressHandler,
-  tagsValue,
-  setTagsValue,
+  ...props
 }) => {
   const { progressModal, datesModal, placeModal, tagsModal } = modalState;
+
+  const { optionsTags, setOptionsTags, selectedTags, setSelectedTags } = props;
+  const animatedComponents = makeAnimated();
 
   const { cities } = useSelector((state) => state.cities);
   const [placesPreview, setPlacesPreview] = useState([]);
   const [placeSearchTerm, setPlaceSearchTerm] = useState([]);
 
-  const [inputTags, setInputTags] = useState('');
+  const dispatch = useDispatch();
 
   const selectedOptions = [
     { label: '😴 - 0', value: 'progress0' },
     { label: '🤠 - %25', value: 'progress25' },
     { label: '🚀 - %50', value: 'progress50' },
     { label: '😎 - %75', value: 'progress75' },
-    { label: '🥳 - %100', value: 'progress100' },
+    { label: '🎉 - %100', value: 'progress100' },
   ];
-
-  const dispatch = useDispatch();
 
   // get cities
   useEffect(() => {
@@ -62,21 +64,15 @@ const NoteModal = ({
     setPlaceSearchTerm('');
     setPlacesPreview('');
   };
-
-  // add a new tag
-  const addNewTagHandler = (e, tags) => {
-    e.preventDefault();
-
-    if (tags) {
-      setTagsValue([...tagsValue, { id_tag: new Date().getTime(), tags }]);
-    }
-    setInputTags('');
+  // record the selected value in the state
+  const selectTagHandler = (selected) => {
+    setSelectedTags(selected);
   };
-
-  // delete tag handler
-  const deleteTagHandler = (id_tag) => {
-    const filteredTag = tagsValue.filter((tag) => tag.id_tag !== id_tag);
-    setTagsValue(filteredTag);
+  // new tag handler
+  const createTagHandler = (inputValue) => {
+    const newOption = { value: inputValue, label: inputValue };
+    setOptionsTags([...optionsTags, newOption]);
+    setSelectedTags([...selectedTags, newOption]);
   };
 
   return (
@@ -95,43 +91,7 @@ const NoteModal = ({
               placeholder='progress...'
               isSearchable={false}
               myFontSize='17px'
-              styles={{
-                control: (provided) => ({
-                  ...provided,
-                  width: '200px',
-                  padding: '7px 3px',
-                  borderRadius: '15px',
-                  boxShadow: 'inset 0 1px 0 rgba(0, 0, 0, 0.1)',
-                }),
-                option: (provided, state) => ({
-                  ...provided,
-                  fontWeight: state.isSelected ? 'bold' : 'normal',
-                  color: 'black',
-                  width: '200px',
-                  fontSize: state.selectProps.myFontSize,
-                }),
-                menu: (provided, state) => ({
-                  ...provided,
-                  fontWeight: state.isSelected ? 'bold' : 'normal',
-                  color: 'black',
-                  width: '200px',
-                  borderRadius: '15px',
-                  boxShadow: 'inset 0 1px 0 rgba(0, 0, 0, 0.1)',
-                  fontSize: state.selectProps.myFontSize,
-                }),
-                menuList: (provided, state) => ({
-                  ...provided,
-                  color: 'black',
-                  width: '200px',
-                  borderRadius: '15px',
-                  fontSize: state.selectProps.myFontSize,
-                }),
-                singleValue: (provided, state) => ({
-                  ...provided,
-                  width: '200px',
-                  fontSize: state.selectProps.myFontSize,
-                }),
-              }}
+              styles={styleSelector}
             />
           </div>
         </div>
@@ -215,43 +175,17 @@ const NoteModal = ({
           className='w-screen h-screen z-50 bg-slate-700 bg-opacity-80 fixed inset-0 flex justify-center items-center'
         >
           <div className='flex flex-col' onClick={(e) => e.stopPropagation()}>
-            <div className='flex flex-col'>
-              <div className='flex mr-4'>
-                <input
-                  type='text'
-                  maxLength='20'
-                  value={inputTags}
-                  onChange={(e) => setInputTags(e.target.value)}
-                  placeholder='new tag...'
-                  className='w-9/12 py-3 px-3 text-main-black rounded-l-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
-                />
-                <button
-                  type='submit'
-                  onClick={(e) => addNewTagHandler(e, inputTags)}
-                  className='w-4/12 py-3 px-1 rounded-r-xl bg-primary-color hover:bg-primary-color-hover focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
-                >
-                  Add tag
-                </button>
-              </div>
-              <div className='w-7/12 h-8 mt-5 flex justify-start items-center text-main-black'>
-                <label className='opacity-70 text-white'>New tag: </label>
-                {tagsValue.map((tag) => (
-                  <div
-                    value={tag.tags}
-                    key={tag.id_tag}
-                    className='ml-2 py-1 pl-2 pr-3 bg-white leading-relaxed rounded-xl text-xs'
-                  >
-                    <span
-                      onClick={() => deleteTagHandler(tag.id_tag)}
-                      className=' mr-1.5 px-1 pb-0.5 text-sm font-bold hover:bg-red-200 rounded-full transition ease-in duration-200 cursor-pointer'
-                    >
-                      ×
-                    </span>
-                    {tag.tags}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <CreatableSelect
+              isClearable
+              options={optionsTags}
+              isMulti
+              onChange={selectTagHandler}
+              onCreateOption={createTagHandler}
+              value={selectedTags}
+              styles={styleSelector}
+              components={animatedComponents}
+              placeholder='create or select'
+            />
           </div>
         </div>
       )}

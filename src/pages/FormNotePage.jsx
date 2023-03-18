@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CheckItem from '../components/CheckItem';
 import NoteModal from '../components/NoteModal';
 import { addAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
+import { useDispatch } from 'react-redux';
 
-const FormNotePage = () => {
+const FormNotePage = ({ ...props }) => {
   const [noteValues, setNoteValues] = useState({
     subjectValue: '',
     textareaValue: '',
@@ -97,7 +97,7 @@ const FormNotePage = () => {
           date: noteValues.dateValue,
           time: noteValues.timeValue,
           place: noteValues.placeValue,
-          tags: tagsValue,
+          tags: props.selectedTags,
         })
       );
 
@@ -118,6 +118,7 @@ const FormNotePage = () => {
         timeValue: null,
         placeValue: null,
       });
+      props.setSelectedTags([]);
 
       navigate('/login?redirect=/notes-list');
     } else {
@@ -146,6 +147,7 @@ const FormNotePage = () => {
           selectProgressHandler={selectProgressHandler}
           tagsValue={tagsValue}
           setTagsValue={setTagsValue}
+          {...props}
         />
 
         <form onSubmit={onSubmit} className='w-screen flex justify-center'>

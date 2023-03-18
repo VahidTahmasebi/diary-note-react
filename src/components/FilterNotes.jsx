@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import TagItem from './TagItem';
+import Select from 'react-select';
+import { styleSelector } from './App';
+import makeAnimated from 'react-select/animated';
 
-const FilterNotes = ({ notes, setFilteredProducts }) => {
+const FilterNotes = ({
+  notes,
+  setFilteredProducts,
+  filteredProducts,
+  ...props
+}) => {
+  const { optionsTags, selectedTags, setSelectedTags } = props;
+  const animatedComponents = makeAnimated();
+
   const [searchValue, setSearchValue] = useState('');
   const [sort, setSort] = useState('latest');
-  const [selectedTag, setSelectedTag] = useState('');
 
   // filter on a data
   useEffect(() => {
     let result = notes;
     result = filterSearchTitle(result);
     result = sortDate(result);
-    result = filterSelectedTag(result);
+    result = filteredTagNotes(result);
+
     setFilteredProducts(result);
-  }, [notes, sort, searchValue, selectedTag]);
+  }, [notes, sort, searchValue, selectedTags]);
 
   // search handler
   const searchHandler = ({ target }) => {
@@ -39,10 +49,22 @@ const FilterNotes = ({ notes, setFilteredProducts }) => {
     });
   };
 
-  // tag filter
-  const filterSelectedTag = (array) => {
-    if (!selectedTag) return array;
-    return array.filter((item) => item.tags.tags == selectedTag);
+  // record the selected value in the state
+  const selectTagHandler = (selected) => {
+    setSelectedTags(selected);
+  };
+
+  // filter by tag
+  const filteredTagNotes = (array) => {
+    if (!selectedTags.length) return array;
+    let filterNotes = [...array];
+
+    return filterNotes.filter((todo) => {
+      const todoTags = todo.tags.map((tag) => tag.value);
+      return selectedTags.every((selectedItem) =>
+        todoTags.includes(selectedItem.value)
+      );
+    });
   };
 
   return (
@@ -86,20 +108,13 @@ const FilterNotes = ({ notes, setFilteredProducts }) => {
         <label htmlFor='sort-products' className='opacity-70 mb-0.5'>
           Tags
         </label>
-        <select
-          name='tags'
-          id='tags'
-          value={selectedTag}
-          onChange={({ target }) => setSelectedTag(target.value)}
-          className='p-2 text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
-        >
-          <option value='' className=' mt-20'>
-            all
-          </option>
-          {notes.map((note) => (
-            <TagItem key={note.id} {...note} />
-          ))}
-        </select>
+        <Select
+          options={optionsTags}
+          isMulti
+          onChange={selectTagHandler}
+          styles={styleSelector}
+          components={animatedComponents}
+        />
       </div>
     </div>
   );
