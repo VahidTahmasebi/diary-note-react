@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// get the data of all the cities
 export const getAsyncCities = createAsyncThunk(
   'cities/getAsyncCities',
   async (_, { rejectWithValue }) => {

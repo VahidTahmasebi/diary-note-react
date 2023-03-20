@@ -5,7 +5,7 @@ import makeAnimated from 'react-select/animated';
 
 const FilterNotes = ({
   notes,
-  setFilteredProducts,
+  setFilteredNotes,
   filteredProducts,
   ...props
 }) => {
@@ -18,11 +18,11 @@ const FilterNotes = ({
   // filter on a data
   useEffect(() => {
     let result = notes;
-    result = filterSearchTitle(result);
+    result = filterSearch(result);
     result = sortDate(result);
     result = filteredTagNotes(result);
 
-    setFilteredProducts(result);
+    setFilteredNotes(result);
   }, [notes, sort, searchValue, selectedTags]);
 
   // search handler
@@ -31,7 +31,7 @@ const FilterNotes = ({
   };
 
   // filter search title
-  const filterSearchTitle = (array) => {
+  const filterSearch = (array) => {
     return array.filter((note) =>
       note.subject.toLowerCase().includes(searchValue)
     );
@@ -81,7 +81,7 @@ const FilterNotes = ({
           value={searchValue}
           onChange={searchHandler}
           maxLength='30'
-          placeholder='note search'
+          placeholder='Note search...'
           className='p-2 text-main-white placeholder:text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
         />
       </div>
@@ -98,8 +98,8 @@ const FilterNotes = ({
           onChange={({ target }) => setSort(target.value)}
           className='p-2 text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
         >
-          <option value='latest'>latest</option>
-          <option value='earliest'>earliest</option>
+          <option value='latest'>Latest</option>
+          <option value='earliest'>Earliest</option>
         </select>
       </div>
 

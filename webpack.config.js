@@ -45,7 +45,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Change Title in Webpack Config',
+      title: 'Diary Notes',
       filename: 'index.html',
       template: './src/index.html',
     }),

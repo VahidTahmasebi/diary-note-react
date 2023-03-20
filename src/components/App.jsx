@@ -84,6 +84,7 @@ const App = () => {
 
 export default App;
 
+// selectors style
 export const styleSelector = {
   control: (provided, state) => ({
     ...provided,
@@ -91,7 +92,7 @@ export const styleSelector = {
     padding: '2px 3px',
     outline: 'none',
     border: '2px solid #9a9da1c3',
-    borderRadius: '15px',
+    borderRadius: '12px',
     fontSize: state.selectProps.myFontSize,
     backgroundColor: '#374151',
     boxShadow: 'inset 0 1px 0 rgba(0, 0, 0, 0.1)',
@@ -120,7 +121,7 @@ export const styleSelector = {
     ...provided,
     width: '179px',
     border: '2px solid #9a9da1c3',
-    borderRadius: '15px',
+    borderRadius: '12px',
     fontSize: state.selectProps.myFontSize,
     fontWeight: state.isSelected ? 'bold' : 'normal',
     backgroundColor: '#374151',
@@ -129,7 +130,7 @@ export const styleSelector = {
   menuList: (provided, state) => ({
     ...provided,
     width: '176px',
-    borderRadius: '15px',
+    borderRadius: '12px',
     fontSize: state.selectProps.myFontSize,
   }),
   singleValue: (provided, state) => ({
@@ -140,7 +141,7 @@ export const styleSelector = {
   }),
   multiValue: (provided) => ({
     ...provided,
-    borderRadius: '10px',
+    borderRadius: '12px',
     backgroundColor: '#4b5563',
   }),
   multiValueLabel: (provided) => ({

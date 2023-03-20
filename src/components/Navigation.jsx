@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const Navigation = ({ noteValues, setNoteValues }) => {
+const Navigation = ({ noteValues, setNoteValues, props }) => {
   const [userLogin, setUserLogin] = useState(null);
-  
+
   const URL_NOTES_LIST =
     window.location.href === 'http://localhost:8080/notes-list';
-
 
   // get local storage values
   useEffect(() => {
@@ -27,9 +26,9 @@ const Navigation = ({ noteValues, setNoteValues }) => {
 
   return (
     <div>
-      {/* cover */}
       <div className='flex flex-col justify-start items-center relative'>
         <div className='w-screen relative flex justify-center items-start '>
+          {/* cover */}
           <div
             style={{
               backgroundImage: `url(${
@@ -71,7 +70,7 @@ const Navigation = ({ noteValues, setNoteValues }) => {
               {userLogin ? <p>{userLogin.name}</p> : <p>Guest</p>}
             </div>
 
-            {/* button */}
+            {/* navigate cover button */}
             {!URL_NOTES_LIST ? (
               <div className='mb-3 flex justify-center items-center'>
                 <input
@@ -90,9 +89,11 @@ const Navigation = ({ noteValues, setNoteValues }) => {
                 </label>
               </div>
             ) : (
+              // navigate new note button
               <Link
                 to='/new-note'
                 className='mb-3 flex justify-center items-center'
+                onClick={() => props.setSelectedTags([])}
               >
                 <label
                   htmlFor='file'

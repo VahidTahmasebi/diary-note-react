@@ -6,7 +6,7 @@ import { getAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
 
 const NotesListPage = ({ ...props }) => {
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredNotes, setFilteredNotes] = useState([]);
 
   const { notes, loading, error } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
@@ -20,20 +20,20 @@ const NotesListPage = ({ ...props }) => {
   if (error) return <p>{error}</p>;
 
   return (
-    <Layout>
+    <Layout {...props}>
       <div className='w-screen flex justify-center my-10'>
         <div className='lg:w-[768px] w-10/12 flex flex-col items-center'>
           {/* filter component */}
           <FilterNotes
             notes={notes}
-            setFilteredProducts={setFilteredProducts}
+            setFilteredNotes={setFilteredNotes}
             {...props}
           />
 
           <div className='w-11/12 md:w-9/12'>
-            {notes.length ? (
+            {filteredNotes.length ? (
               <span className='text-left opacity-70'>
-                There are {notes.length} notes available
+                There are {filteredNotes.length} notes available
               </span>
             ) : (
               ''
@@ -41,7 +41,7 @@ const NotesListPage = ({ ...props }) => {
 
             {/* note list */}
             <ul className='max-h-96 mt-1 px-3 rounded-xl bg-gray-700 shadow-lg overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'>
-              {filteredProducts.map((note) => (
+              {filteredNotes.map((note) => (
                 <NoteItem key={note.id} {...note} />
               ))}
             </ul>

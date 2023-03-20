@@ -88,7 +88,7 @@ const NoteModal = ({
               value={noteValues.progressValue}
               onChange={selectProgressHandler}
               options={selectedOptions}
-              placeholder='progress...'
+              placeholder='Progress...'
               isSearchable={false}
               myFontSize='17px'
               styles={styleSelector}
@@ -112,14 +112,14 @@ const NoteModal = ({
               name='dateValue'
               value={noteValues.dateValue}
               onChange={changeHandler}
-              className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              className='w-56 p-3 text-main-black rounded-xl border-2 border-[#9a9da1c3] hover:border-gray-400 outline-none bg-gray-700 text-slate-400 shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
             />
             <input
               type='time'
               name='timeValue'
               value={noteValues.timeValue}
               onChange={changeHandler}
-              className='p-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              className='w-56 p-3 text-main-black rounded-xl border-2 border-[#9a9da1c3] hover:border-gray-400 outline-none bg-gray-700 text-slate-400 shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
             />
           </div>
         </div>
@@ -134,14 +134,14 @@ const NoteModal = ({
           <div className='flex flex-col' onClick={(e) => e.stopPropagation()}>
             <span
               value={placesPreview}
-              className='w-72 h-fit max-h-40 overflow-y-auto bg-main-white text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              className='w-72 h-fit max-h-40 overflow-y-auto bg-gray-600 border-[#9a9da1c3] hover:border-gray-400 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'
             >
               {placesPreview &&
                 placesPreview.map((place, index) => (
-                  <div key={index} className='p-3'>
+                  <div key={index} className='p-3  border-b-2 border-[#414d60]'>
                     <a
                       onClick={() => previewPosition(place)}
-                      className='cursor-pointer'
+                      className='cursor-pointer text-white'
                     >
                       {place.name}
                     </a>
@@ -153,13 +153,13 @@ const NoteModal = ({
               name='locationValue'
               value={placeSearchTerm}
               onChange={placeSearchHandler}
-              placeholder='city search'
-              className='p-3 my-3 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              placeholder='City search'
+              className='p-3 my-3 text-main-black rounded-xl border-2 border-[#9a9da1c3] hover:border-gray-400 outline-none bg-gray-700 text-white placeholder:text-slate-400 shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
             />
             <div
               className={
                 noteValues.placeValue &&
-                'w-72 h-fit p-3 text-main-black bg-main-white rounded-xl'
+                'w-72 h-fit p-3 rounded-xl border-[#9a9da1c3] hover:border-gray-400 bg-indigo-500 text-white'
               }
             >
               {noteValues.placeValue}
@@ -184,7 +184,7 @@ const NoteModal = ({
               value={selectedTags}
               styles={styleSelector}
               components={animatedComponents}
-              placeholder='create or select'
+              placeholder='Create or Select'
             />
           </div>
         </div>

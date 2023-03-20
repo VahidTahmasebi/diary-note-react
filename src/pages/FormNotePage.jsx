@@ -166,7 +166,7 @@ const FormNotePage = ({ ...props }) => {
                   value={noteValues.subjectValue}
                   onChange={changeHandler}
                   maxLength='25'
-                  placeholder='your subject...'
+                  placeholder='Your subject...'
                   className='lg:w-full md:mx-0 p-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                 />
               </div>
@@ -178,7 +178,7 @@ const FormNotePage = ({ ...props }) => {
                 </label>
                 <textarea
                   className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
-                  placeholder='your note...'
+                  placeholder='Your note...'
                   value={noteValues.textareaValue}
                   id='textareaValue'
                   name='textareaValue'
@@ -199,7 +199,7 @@ const FormNotePage = ({ ...props }) => {
                       id='checklist'
                       value={inputChecklist}
                       onChange={(e) => setInputChecklist(e.target.value)}
-                      placeholder='your check...'
+                      placeholder='Your check...'
                       maxLength='23'
                       className='w-11/12 py-2 px-3 text-main-white rounded-l-xl outline-none shadow-lg bg-gray-600 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
                     />

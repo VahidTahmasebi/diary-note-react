@@ -27,7 +27,6 @@ export const signupAsyncUsers = createAsyncThunk(
         password: payload.password,
         profileImage: payload.profileImage,
       });
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue([], error);

@@ -108,7 +108,7 @@ const SignupPage = () => {
           type='password'
         />
 
-        {/* cover button */}
+        {/* avatar button */}
         <div className='mb-3'>
           <input
             type='file'
@@ -121,7 +121,7 @@ const SignupPage = () => {
           />
           <label
             htmlFor='file'
-            className='py-2 px-4 rounded-full bg-gray-400 text-base font-semibold shadow-md outline-none cursor-not-allowed'
+            className='py-2 px-4 rounded-full bg-gray-400 opacity-40 text-base font-semibold shadow-md outline-none cursor-not-allowed'
             // className="hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 "
           >
             Avatar
@@ -131,7 +131,7 @@ const SignupPage = () => {
         <button
           type='submit'
           disabled
-          className='py-2 px-4 rounded-full bg-gray-400 text-base font-semibold shadow-md outline-none cursor-not-allowed'
+          className='py-2 px-4 rounded-full bg-gray-400 opacity-40 text-base font-semibold shadow-md outline-none cursor-not-allowed'
           // className='py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
         >
           Signup
