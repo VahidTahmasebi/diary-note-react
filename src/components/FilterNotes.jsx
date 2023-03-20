@@ -3,12 +3,7 @@ import Select from 'react-select';
 import { styleSelector } from './App';
 import makeAnimated from 'react-select/animated';
 
-const FilterNotes = ({
-  notes,
-  setFilteredNotes,
-  filteredProducts,
-  ...props
-}) => {
+const FilterNotes = ({ notes, setFilteredNotes, ...props }) => {
   const { optionsTags, selectedTags, setSelectedTags } = props;
   const animatedComponents = makeAnimated();
 
@@ -32,15 +27,20 @@ const FilterNotes = ({
 
   // filter search title
   const filterSearch = (array) => {
-    return array.filter((note) =>
-      note.subject.toLowerCase().includes(searchValue)
-    );
+    if (searchValue == '') return array;
+
+    return array.filter((n) => {
+      return Object.values(n)
+        .join(' ')
+        .toLowerCase()
+        .includes(searchValue.toLowerCase());
+    });
   };
 
   // sort date
   const sortDate = (array) => {
-    let sortedProducts = [...array];
-    return sortedProducts.sort((a, b) => {
+    let sortedNotes = [...array];
+    return sortedNotes.sort((a, b) => {
       if (sort === 'latest') {
         return new Date(a.createAt) > new Date(b.createAt) ? -1 : 1;
       } else if (sort === 'earliest') {
@@ -76,7 +76,6 @@ const FilterNotes = ({
         </label>
         <input
           type='text'
-          name='searchInput'
           id='searchInput'
           value={searchValue}
           onChange={searchHandler}
@@ -88,12 +87,8 @@ const FilterNotes = ({
 
       {/* sort */}
       <div className='md:w-24 w-full flex flex-col my-3 md:my-0'>
-        <label htmlFor='sort-products' className='opacity-70'>
-          Sort
-        </label>
+        <label className='opacity-70'>Sort</label>
         <select
-          name='sort-products'
-          id='sort-products'
           value={sort}
           onChange={({ target }) => setSort(target.value)}
           className='p-2 text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
@@ -105,9 +100,7 @@ const FilterNotes = ({
 
       {/* tags */}
       <div className='w-full md:w-40 flex flex-col'>
-        <label htmlFor='sort-products' className='opacity-70 mb-0.5'>
-          Tags
-        </label>
+        <label className='opacity-70 mb-0.5'>Tags</label>
         <Select
           options={optionsTags}
           isMulti
