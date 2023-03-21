@@ -16,7 +16,10 @@ const Navigation = ({ noteValues, setNoteValues, props }) => {
   // cover handler
   const coverSelectHandler = (e) => {
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.fileName = file.name;
+    reader.onload = (e) => {
+      console.log(reader.result);
+      console.log(e.target.fileName);
       if (reader.readyState === 2) {
         setNoteValues({ ...noteValues, coverValue: reader.result });
       }

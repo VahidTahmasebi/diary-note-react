@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { getAsyncCities } from '../feature/citiesSlice';
 import CreatableSelect from 'react-select/creatable';
-import { styleSelector } from './App';
 import makeAnimated from 'react-select/animated';
+import {
+  styleSingleSelector,
+  styleMultiSelector,
+} from '../assets/styles/selectorsStyle';
 
 const NoteModal = ({
   modalState,
@@ -64,10 +67,12 @@ const NoteModal = ({
     setPlaceSearchTerm('');
     setPlacesPreview('');
   };
+
   // record the selected value in the state
   const selectTagHandler = (selected) => {
     setSelectedTags(selected);
   };
+
   // new tag handler
   const createTagHandler = (inputValue) => {
     const newOption = { value: inputValue, label: inputValue };
@@ -91,7 +96,8 @@ const NoteModal = ({
               placeholder='Progress...'
               isSearchable={false}
               myFontSize='17px'
-              styles={styleSelector}
+              myWidthSize='179px'
+              styles={styleSingleSelector}
             />
           </div>
         </div>
@@ -125,7 +131,7 @@ const NoteModal = ({
         </div>
       )}
 
-      {/* searchLocation */}
+      {/* searchLocation module */}
       {placeModal && (
         <div
           onClick={() => setModalState({ ...modalState, placeModal: false })}
@@ -182,7 +188,8 @@ const NoteModal = ({
               onChange={selectTagHandler}
               onCreateOption={createTagHandler}
               value={selectedTags}
-              styles={styleSelector}
+              myWidthSize='179px'
+              styles={styleMultiSelector}
               components={animatedComponents}
               placeholder='Create or Select'
             />
