@@ -4,8 +4,11 @@ import FilterNotes from '../components/FilterNotes';
 import NoteItem from '../components/NoteItem';
 import { getAsyncNotes } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
+import { TabTitle } from '../utils/TabTitle';
 
 const NotesListPage = ({ ...props }) => {
+  TabTitle('Note list - Diary Note');
+  
   const [filteredNotes, setFilteredNotes] = useState([]);
 
   const { notes, loading, error } = useSelector((state) => state.notes);

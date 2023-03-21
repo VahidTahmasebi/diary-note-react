@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { signupAsyncUsers } from '../../feature/usersSlice';
 import { useQuery } from '../../hooks/useQuery';
 import { toast } from 'react-hot-toast';
+import { TabTitle } from '../../utils/TabTitle';
 
 const initialValues = {
   name: '',
@@ -34,10 +35,13 @@ const validationSchema = Yup.object({
 });
 
 const SignupPage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  TabTitle('Signup - Diary Note');
+  
   const [userLogin, setUserLogin] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const query = useQuery();
   const redirect = query.get('redirect') || '/';
 
@@ -89,6 +93,7 @@ const SignupPage = () => {
   return (
     <div className='h-screen w-screen flex flex-col justify-center items-center gap-y-14'>
       <h2 className='text-lg'>Let's create your account</h2>
+
       <form
         onSubmit={formik.handleSubmit}
         className='w-screen flex flex-col justify-center items-center gap-y-3'
@@ -137,6 +142,7 @@ const SignupPage = () => {
           Signup
         </button>
       </form>
+      
       <p>
         Already have an account?{' '}
         <Link

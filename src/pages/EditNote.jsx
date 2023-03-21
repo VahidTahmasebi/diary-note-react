@@ -10,8 +10,11 @@ import {
   getAsyncOneNote,
 } from '../feature/notesSlice';
 import Layout from '../Layout/Layout';
+import { TabTitle } from '../utils/TabTitle';
 
 const FormNotePage = ({ ...props }) => {
+  TabTitle('Note edit - Diary Note');
+  
   const [noteValues, setNoteValues] = useState({
     subjectValue: '',
     textareaValue: '',

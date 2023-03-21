@@ -46,6 +46,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Diary Notes',
+      favicon: './src/assets/images/favicon.png',
       filename: 'index.html',
       template: './src/index.html',
     }),

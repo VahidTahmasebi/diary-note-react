@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '../../hooks/useQuery';
 import { toast } from 'react-hot-toast';
+import { TabTitle } from '../../utils/TabTitle';
 
 const initialValues = {
   email: 'BrendanEich@diaryNote.com',
@@ -22,6 +23,8 @@ const validationSchema = Yup.object({
 });
 
 const LoginPage = () => {
+  TabTitle('Login - Diary Note');
+
   const [userLogin, setUserLogin] = useState(false);
 
   const { users } = useSelector((state) => state.users);
@@ -91,6 +94,7 @@ const LoginPage = () => {
   return (
     <div className='h-screen w-screen flex flex-col justify-center items-center gap-y-14'>
       <h2 className='text-lg'>Welcome back!</h2>
+
       <form
         onSubmit={formik.handleSubmit}
         className='w-screen flex flex-col justify-center items-center gap-y-5'
@@ -110,6 +114,7 @@ const LoginPage = () => {
           Login
         </button>
       </form>
+
       <p>
         Don't you have an account?{' '}
         <Link
