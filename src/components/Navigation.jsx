@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Navigation = ({ noteValues, setNoteValues, props }) => {
+const Navigation = ({ noteValues, setNoteValues, ...props }) => {
   const [userLogin, setUserLogin] = useState(null);
 
-  const URL_NOTES_LIST =
-    window.location.pathname === '/notes-list';
+  const URL_NOTES_LIST = window.location.pathname === '/notes-list';
 
   // get local storage values
   useEffect(() => {
