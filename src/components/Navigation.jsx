@@ -5,7 +5,7 @@ const Navigation = ({ noteValues, setNoteValues, props }) => {
   const [userLogin, setUserLogin] = useState(null);
 
   const URL_NOTES_LIST =
-    window.location.href === 'http://localhost:8080/notes-list';
+    window.location.pathname === '/notes-list';
 
   // get local storage values
   useEffect(() => {

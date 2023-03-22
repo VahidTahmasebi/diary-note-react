@@ -8,7 +8,7 @@ import { TabTitle } from '../utils/TabTitle';
 
 const NotesListPage = ({ ...props }) => {
   TabTitle('Note list - Diary Note');
-  
+
   const [filteredNotes, setFilteredNotes] = useState([]);
 
   const { notes, loading, error } = useSelector((state) => state.notes);
@@ -44,9 +44,10 @@ const NotesListPage = ({ ...props }) => {
 
             {/* note list */}
             <ul className='max-h-96 mt-1 px-3 rounded-xl bg-gray-700 shadow-lg overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'>
-              {filteredNotes.map((note) => (
-                <NoteItem key={note.id} {...note} />
-              ))}
+              {filteredNotes &&
+                filteredNotes.map((note) => (
+                  <NoteItem key={note.id} {...note} />
+                ))}
             </ul>
           </div>
         </div>
