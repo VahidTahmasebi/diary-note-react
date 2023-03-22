@@ -180,7 +180,7 @@ const FormNotePage = ({ ...props }) => {
                   Note
                 </label>
                 <textarea
-                  className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                  className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'
                   placeholder='Your note...'
                   value={noteValues.textareaValue}
                   id='textareaValue'

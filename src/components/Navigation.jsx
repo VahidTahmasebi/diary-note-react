@@ -18,8 +18,8 @@ const Navigation = ({ noteValues, setNoteValues, props }) => {
     const reader = new FileReader();
     reader.fileName = file.name;
     reader.onload = (e) => {
-      console.log(reader.result);
-      console.log(e.target.fileName);
+      // console.log(reader.result);
+      // console.log(e.target.fileName);
       if (reader.readyState === 2) {
         setNoteValues({ ...noteValues, coverValue: reader.result });
       }
@@ -39,7 +39,7 @@ const Navigation = ({ noteValues, setNoteValues, props }) => {
               })`,
               height: `${!URL_NOTES_LIST ? '160px' : '96px'}`,
             }}
-            className='lg:w-[1024px] w-full bg-cover bg-opacity-95 bg-blend-multiply relative bg-main-grey rounded-bl-full rounded-br-full'
+            className='lg:w-[1024px] w-full bg-cover bg-center bg-opacity-95 bg-blend-multiply relative bg-main-grey rounded-bl-full rounded-br-full'
           >
             {/* profile */}
             <div className='flex justify-start items-center my-4 mx-9'>
