@@ -27,27 +27,32 @@
   # 🤸 Getting Started
 
 ## 💾 Installation
-**Step 1** - npm start:
+**Step 1** - installing packages:
+
+```bash
+npm i
+```
+**Step 2** - npm start:
 
 ```bash
 npm start
 ```
 
-**Step 2** - Call data notes:
+**Step 3** - Call data notes:
 
 ```bash
 cd src/server
 npm run server
 ```
 
-**Step 3** - Calling data of cities:
+**Step 4** - Calling data of cities:
 
 ```bash
 cd src/server
 npm run server-cities
 ```
 
-**Step 4** - Calling data of users:
+**Step 5** - Calling data of users:
 
 ```bash
 cd src/server
