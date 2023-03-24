@@ -11,10 +11,18 @@
   <br />
   
   # 🎞 Watch the introduction video
-    
+
   [![Watch video](https://markdown-videos.deta.dev/youtube/6d0p_vVr8F8)](https://youtu.be/6d0p_vVr8F8)
   
   <br />
+  
+  
+  # 🧭 Roadmap
+    
+  <img alt="Diary Notes Logo" src="https://github.com/VahidTahmasebi/diary-note-react/blob/main/screenshots/Roadmap.png?raw=true" alt="Logo" width="100%">
+  
+  <br />
+  
   
   # 🤸 Getting Started
 
