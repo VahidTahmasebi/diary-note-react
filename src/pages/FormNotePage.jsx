@@ -10,7 +10,7 @@ import { TabTitle } from '../utils/TabTitle';
 
 const FormNotePage = ({ ...props }) => {
   TabTitle('New note - Diary Note');
-  
+
   const [noteValues, setNoteValues] = useState({
     subjectValue: '',
     textareaValue: '',
@@ -218,9 +218,9 @@ const FormNotePage = ({ ...props }) => {
                   {listChecklist.map((item) => (
                     <CheckItem
                       key={item.id_check}
-                      {...item}
-                      deleteCheckHandler={deleteCheckHandler}
                       completeCheckHandler={completeCheckHandler}
+                      deleteCheckHandler={deleteCheckHandler}
+                      {...item}
                     />
                   ))}
                 </ul>

@@ -128,9 +128,6 @@ const notesSlice = createSlice({
     [getAsyncOneNote.fulfilled]: (state, action) => {
       return { ...state, notes: action.payload, loading: false, error: null };
     },
-    [editAsyncNote.fulfilled]: (state, action) => {
-      state.notes = action.payload;
-    },
   },
 });
 

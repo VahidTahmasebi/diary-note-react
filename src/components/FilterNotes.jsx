@@ -70,9 +70,9 @@ const FilterNotes = ({ notes, setFilteredNotes, ...props }) => {
   // filter by tag
   const filteredTagNotes = (array) => {
     if (!selectedTags.length) return array;
-    let filterNotes = [...array];
+    let filterNote = [...array];
 
-    return filterNotes.filter((todo) => {
+    return filterNote.filter((todo) => {
       const todoTags = todo.tags.map((tag) => tag.value);
       return selectedTags.every((selectedItem) =>
         todoTags.includes(selectedItem.value)
