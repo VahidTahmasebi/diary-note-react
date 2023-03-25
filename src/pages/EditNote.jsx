@@ -208,23 +208,27 @@ const FormNotePage = ({ ...props }) => {
                 </label>
 
                 <ul className='w-full flex flex-col max-h-80 mt-1 p-3 rounded-xl bg-gray-700 shadow-lg transition ease-in duration-200 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'>
-                  <div className='flex mb-4'>
-                    <input
-                      type='text'
-                      id='checklist'
-                      value={inputChecklist}
-                      onChange={(e) => setInputChecklist(e.target.value)}
-                      placeholder='Your check...'
-                      maxLength='23'
-                      className='w-11/12 py-2 px-3 text-main-white rounded-l-xl outline-none shadow-lg bg-gray-600 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
-                    />
-                    <button
-                      type='submit'
-                      onClick={(e) => addNewChecklistHandler(e, inputChecklist)}
-                      className='w-2/12 py-2 px-1 rounded-r-xl text-main-white bg-gray-600 ring-offset-1 hover:bg-primary-color-hover hover:text-main-white focus-within:opacity-70 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-indigo-200 text-sm font-semibold shadow-md  transition ease-in duration-200 outline-none'
-                    >
-                      Add
-                    </button>
+                  <div className={`flex ${listChecklist.length && 'mb-4'}`}>
+                    <div className='w-full relative flex text-sm font-semibold'>
+                      <input
+                        type='text'
+                        id='checklist'
+                        value={inputChecklist}
+                        onChange={(e) => setInputChecklist(e.target.value)}
+                        placeholder='Your check...'
+                        maxLength='23'
+                        className='w-full py-2 px-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-600 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                      />
+                      <button
+                        type='submit'
+                        onClick={(e) =>
+                          addNewChecklistHandler(e, inputChecklist)
+                        }
+                        className='absolute right-0 py-2 px-4 rounded-r-xl text-main-white bg-gray-600 ring-offset-1 hover:bg-primary-color-hover hover:text-main-white shadow-md transition ease-in duration-200 outline-none focus-within:opacity-70 focus-within:ring-1 focus-within:ring-offset-1 focus-within:ring-offset-indigo-200'
+                      >
+                        Add
+                      </button>
+                    </div>
                   </div>
 
                   {listChecklist.map((item) => (
