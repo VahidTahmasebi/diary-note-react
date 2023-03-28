@@ -109,7 +109,7 @@ const LoginPage = () => {
 
         <button
           type='submit'
-          className='py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
+          className='py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
         >
           Login
         </button>

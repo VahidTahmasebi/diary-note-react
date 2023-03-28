@@ -150,7 +150,8 @@ const FormNotePage = ({ ...props }) => {
   };
 
   // option list className
-  const optionClass = 'md:ml-3';
+  const optionClass =
+    'flex flex-col md:flex-row items-center cursor-pointer hover:text-primary-color transition-all duration-75 ease-in';
 
   return (
     <Layout noteValues={noteValues} setNoteValues={setNoteValues}>
@@ -182,7 +183,7 @@ const FormNotePage = ({ ...props }) => {
                   onChange={changeHandler}
                   maxLength='25'
                   placeholder='Your subject...'
-                  className='lg:w-full md:mx-0 p-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                  className='lg:w-full md:mx-0 p-3 text-main-white rounded-xl outline-none shadow-lg bg-main-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-main-indigo-200 transition ease-in duration-200'
                 />
               </div>
 
@@ -192,7 +193,7 @@ const FormNotePage = ({ ...props }) => {
                   Note
                 </label>
                 <textarea
-                  className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                  className='lg:w-full h-28 min-h-20 max-h-64 p-3 text-main-white rounded-xl outline-none shadow-lg bg-main-gray-700 focus:ring-1 focus:ring-offset-1 focus:ring-main-indigo-200 transition ease-in duration-200'
                   placeholder='Your note...'
                   value={noteValues.textareaValue}
                   id='textareaValue'
@@ -207,7 +208,7 @@ const FormNotePage = ({ ...props }) => {
                   Checklist
                 </label>
 
-                <ul className='w-full flex flex-col max-h-80 mt-1 p-3 rounded-xl bg-gray-700 shadow-lg transition ease-in duration-200 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'>
+                <ul className='w-full flex flex-col max-h-80 mt-1 p-3 rounded-xl bg-main-gray-700 shadow-lg transition ease-in duration-200 overflow-y-auto scrollbar-thin scrollbar-thumb-main-gray-500 scrollbar-track-main-gray-700'>
                   <div className={`flex ${listChecklist.length && 'mb-4'}`}>
                     <div className='w-full relative flex text-sm font-semibold'>
                       <input
@@ -217,14 +218,14 @@ const FormNotePage = ({ ...props }) => {
                         onChange={(e) => setInputChecklist(e.target.value)}
                         placeholder='Your check...'
                         maxLength='23'
-                        className='w-full py-2 px-3 text-main-white rounded-xl outline-none shadow-lg bg-gray-600 focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+                        className='w-full py-2 px-3 text-main-white rounded-xl outline-none shadow-lg bg-main-gray-600 focus:ring-1 focus:ring-offset-1 focus:ring-main-indigo-200 transition ease-in duration-200'
                       />
                       <button
                         type='submit'
                         onClick={(e) =>
                           addNewChecklistHandler(e, inputChecklist)
                         }
-                        className='absolute right-0 py-2 px-4 rounded-r-xl text-main-white bg-gray-600 ring-offset-1 hover:bg-primary-color-hover hover:text-main-white shadow-md transition ease-in duration-200 outline-none focus-within:opacity-70 focus-within:ring-1 focus-within:ring-offset-1 focus-within:ring-offset-indigo-200'
+                        className='absolute right-0 py-2 px-4 rounded-r-xl text-main-white bg-main-gray-600 ring-offset-1 hover:bg-primary-color-hover hover:text-main-white shadow-md transition ease-in duration-200 outline-none focus-within:opacity-70 focus-within:ring-1 focus-within:ring-offset-1 focus-within:ring-offset-main-indigo-200'
                       >
                         Add
                       </button>
@@ -247,13 +248,13 @@ const FormNotePage = ({ ...props }) => {
             <div className='w-full md:w-fit h-56'>
               <div className='opacity-70 mb-0.5'>Add to card</div>
               <div className='flex flex-col justify-start items-center'>
-                <ul className='w-full md:w-40 md:h-56 flex md:flex-col justify-around items-start px-4 py-3 bg-gray-700 rounded-xl text-main-white transition-all duration-100 ease-in'>
+                <ul className='w-full md:w-40 md:h-56 flex md:flex-col justify-around items-start px-4 py-3 bg-main-gray-700 rounded-xl text-main-white transition-all duration-100 ease-in'>
                   {/* Progress */}
                   <li
                     onClick={() =>
                       setModalState({ ...modalState, progressModal: true })
                     }
-                    className='flex flex-col md:flex-row items-center cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
+                    className={optionClass}
                   >
                     <span>
                       <svg
@@ -262,7 +263,7 @@ const FormNotePage = ({ ...props }) => {
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke='currentColor'
-                        className='w-6 h-6'
+                        className='w-6 h-6 md:mr-3'
                       >
                         <path
                           strokeLinecap='round'
@@ -276,7 +277,7 @@ const FormNotePage = ({ ...props }) => {
                         />
                       </svg>
                     </span>
-                    <a className={optionClass}>Progress</a>
+                    <a>Progress</a>
                   </li>
 
                   {/* dates */}
@@ -284,7 +285,7 @@ const FormNotePage = ({ ...props }) => {
                     onClick={() =>
                       setModalState({ ...modalState, datesModal: true })
                     }
-                    className='flex flex-col md:flex-row items-center cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
+                    className={optionClass}
                   >
                     <span>
                       <svg
@@ -293,7 +294,7 @@ const FormNotePage = ({ ...props }) => {
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke='currentColor'
-                        className='w-6 h-6'
+                        className='w-6 h-6 md:mr-3'
                       >
                         <path
                           strokeLinecap='round'
@@ -302,7 +303,7 @@ const FormNotePage = ({ ...props }) => {
                         />
                       </svg>
                     </span>
-                    <a className={optionClass}>Dates</a>
+                    <a>Dates</a>
                   </li>
 
                   {/* location */}
@@ -310,7 +311,7 @@ const FormNotePage = ({ ...props }) => {
                     onClick={() =>
                       setModalState({ ...modalState, placeModal: true })
                     }
-                    className='flex flex-col md:flex-row items-center cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
+                    className={optionClass}
                   >
                     <span>
                       <svg
@@ -319,7 +320,7 @@ const FormNotePage = ({ ...props }) => {
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke='currentColor'
-                        className='w-6 h-6'
+                        className='w-6 h-6 md:mr-3'
                       >
                         <path
                           strokeLinecap='round'
@@ -333,7 +334,7 @@ const FormNotePage = ({ ...props }) => {
                         />
                       </svg>
                     </span>
-                    <a className={optionClass}>Location</a>
+                    <a>Location</a>
                   </li>
 
                   {/* tags */}
@@ -341,7 +342,7 @@ const FormNotePage = ({ ...props }) => {
                     onClick={() =>
                       setModalState({ ...modalState, tagsModal: true })
                     }
-                    className='flex flex-col md:flex-row items-center cursor-pointer hover:text-primary-color transition-all duration-75 ease-in'
+                    className={optionClass}
                   >
                     <span>
                       <svg
@@ -350,7 +351,7 @@ const FormNotePage = ({ ...props }) => {
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke='currentColor'
-                        className='w-6 h-6'
+                        className='w-6 h-6 md:mr-3'
                       >
                         <path
                           strokeLinecap='round'
@@ -359,7 +360,7 @@ const FormNotePage = ({ ...props }) => {
                         />
                       </svg>
                     </span>
-                    <a className={optionClass}>Tags</a>
+                    <a>Tags</a>
                   </li>
                 </ul>
               </div>
@@ -368,7 +369,7 @@ const FormNotePage = ({ ...props }) => {
               <div className='text-center'>
                 <button
                   type='submit'
-                  className='py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
+                  className='py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
                 >
                   Save note
                 </button>

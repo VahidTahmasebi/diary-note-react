@@ -38,11 +38,11 @@ const Navigation = ({ noteValues, setNoteValues, ...props }) => {
               })`,
               height: `${!URL_NOTES_LIST ? '160px' : '96px'}`,
             }}
-            className='lg:w-[1024px] w-full bg-cover bg-center bg-opacity-95 bg-blend-multiply relative bg-main-grey rounded-bl-full rounded-br-full'
+            className='lg:w-[1024px] w-full bg-cover bg-center bg-blend-multiply relative bg-main-gray rounded-bl-full rounded-br-full'
           >
             {/* profile */}
             <div className='flex justify-start items-center my-4 mx-9'>
-              <div className='w-10 h-10 flex justify-center items-center mr-2 ml-7 rounded-full border-2 border-indigo-200 bg-gray-400'>
+              <div className='w-10 h-10 flex justify-center items-center mr-2 ml-7 rounded-full border-2 border-main-indigo-200 bg-main-gray-400'>
                 {userLogin ? (
                   <div
                     className='w-9 h-9 rounded-full bg-cover'
@@ -85,7 +85,7 @@ const Navigation = ({ noteValues, setNoteValues, ...props }) => {
                 />
                 <label
                   htmlFor='file'
-                  className='absolute -bottom-4 md:right-44 py-2 px-4 rounded-full bg-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
+                  className='absolute -bottom-4 md:right-44 py-2 px-4 rounded-full bg-main-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
                 >
                   Cover
                 </label>
@@ -99,7 +99,7 @@ const Navigation = ({ noteValues, setNoteValues, ...props }) => {
               >
                 <label
                   htmlFor='file'
-                  className='absolute -bottom-4 md:right-44 py-2 px-4 rounded-full bg-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
+                  className='absolute -bottom-4 md:right-44 py-2 px-4 rounded-full bg-main-gray-400 hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none cursor-pointer'
                 >
                   New note
                 </label>

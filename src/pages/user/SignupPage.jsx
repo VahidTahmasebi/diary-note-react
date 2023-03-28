@@ -36,7 +36,7 @@ const validationSchema = Yup.object({
 
 const SignupPage = () => {
   TabTitle('Signup - Diary Note');
-  
+
   const [userLogin, setUserLogin] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
 
@@ -126,8 +126,8 @@ const SignupPage = () => {
           />
           <label
             htmlFor='file'
-            className='py-2 px-4 rounded-full bg-gray-400 opacity-40 text-base font-semibold shadow-md outline-none cursor-not-allowed'
-            // className="hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 "
+            className='py-2 px-4 rounded-full bg-main-gray-400 opacity-40 text-base font-semibold shadow-md outline-none cursor-not-allowed'
+            // className="hover:text-main-white hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset- transition ease-in duration-200 "
           >
             Avatar
           </label>
@@ -136,13 +136,13 @@ const SignupPage = () => {
         <button
           type='submit'
           disabled
-          className='py-2 px-4 rounded-full bg-gray-400 opacity-40 text-base font-semibold shadow-md outline-none cursor-not-allowed'
-          // className='py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
+          className='py-2 px-4 rounded-full bg-main-gray-400 opacity-40 text-base font-semibold shadow-md outline-none cursor-not-allowed'
+          // className='py-2 px-4 mt-9 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'
         >
           Signup
         </button>
       </form>
-      
+
       <p>
         Already have an account?{' '}
         <Link

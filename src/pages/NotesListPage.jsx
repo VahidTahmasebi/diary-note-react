@@ -43,7 +43,7 @@ const NotesListPage = ({ ...props }) => {
             )}
 
             {/* note list */}
-            <ul className='max-h-96 mt-1 px-3 rounded-xl bg-gray-700 shadow-lg overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'>
+            <ul className='max-h-96 mt-1 px-3 rounded-xl bg-main-gray-700 shadow-lg overflow-auto scrollbar-thin scrollbar-thumb-main-gray-500 scrollbar-track-main-gray-700'>
               {filteredNotes &&
                 filteredNotes.map((note) => (
                   <NoteItem key={note.id} {...note} />

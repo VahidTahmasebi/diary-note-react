@@ -4,7 +4,7 @@ const CheckItem = ({ completeCheckHandler, deleteCheckHandler, ...item }) => {
   const { id_check, check, completed } = item;
 
   return (
-    <li className='lg:w-full flex items-center mb-2 rounded-xl shadow-lg hover:ring-1 hover:ring-offset-1 hover:ring-indigo-200 transition ease-in duration-200'>
+    <li className='lg:w-full flex items-center mb-2 rounded-xl shadow-lg hover:ring-1 hover:ring-offset-1 hover:ring-main-indigo-200 transition ease-in duration-200'>
       <label
         htmlFor={id_check}
         className='flex flex-1 items-center px-5 py-3 overflow-x-auto cursor-pointer'
@@ -19,7 +19,7 @@ const CheckItem = ({ completeCheckHandler, deleteCheckHandler, ...item }) => {
           onChange={() => completeCheckHandler(id_check)}
         />
 
-        <div className='w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 border-2 border-primary-color focus-within:border-primary-color rounded-md bg-white'>
+        <div className='w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 border-2 border-primary-color focus-within:border-primary-color rounded-md bg-main-white'>
           <svg
             className='w-2 h-2 fill-current hidden text-primary-color pointer-events-none'
             version='1.1'
@@ -41,7 +41,7 @@ const CheckItem = ({ completeCheckHandler, deleteCheckHandler, ...item }) => {
         {/* title check */}
         <span
           className={`overflow-x-auto transition ease-linear duration-500
-           ${completed && 'text-gray-400 line-through'}
+           ${completed && 'text-main-gray-400 line-through'}
            `}
         >
           {check}
@@ -59,7 +59,7 @@ const CheckItem = ({ completeCheckHandler, deleteCheckHandler, ...item }) => {
           viewBox='0 0 24 24'
           strokeWidth='1.5'
           stroke='currentColor'
-          className='w-6 h-6 hover:text-red-500 transition ease-in duration-200'
+          className='w-6 h-6 hover:text-main-red-500 transition ease-in duration-200'
         >
           <path
             strokeLinecap='round'

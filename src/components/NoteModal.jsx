@@ -80,13 +80,17 @@ const NoteModal = ({
     setSelectedTags([...selectedTags, newOption]);
   };
 
+  // modal container className
+  const modalClass =
+    'w-screen h-screen inset-0 z-50 fixed flex justify-center items-center bg-main-slate-700';
+
   return (
     <>
       {/* progress module */}
       {progressModal && (
         <div
           onClick={() => setModalState({ ...modalState, progressModal: false })}
-          className='w-screen h-screen z-50 bg-slate-700 bg-opacity-80 fixed inset-0 flex justify-center items-center select-none'
+          className={`select-none ${modalClass}`}
         >
           <div onClick={(e) => e.stopPropagation()} className='flex flex-col'>
             <Select
@@ -107,7 +111,7 @@ const NoteModal = ({
       {datesModal && (
         <div
           onClick={() => setModalState({ ...modalState, datesModal: false })}
-          className='w-screen h-screen z-50 bg-slate-700 bg-opacity-80 fixed inset-0 flex justify-center items-center'
+          className={modalClass}
         >
           <div
             onClick={(e) => e.stopPropagation()}
@@ -118,14 +122,14 @@ const NoteModal = ({
               name='dateValue'
               value={noteValues.dateValue}
               onChange={changeHandler}
-              className='w-56 p-3 text-main-black rounded-xl border-2 border-[#9a9da1c3] hover:border-gray-400 outline-none bg-gray-700 text-slate-400 shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              className='w-56 p-3 rounded-xl border-2 border-main-gray-400 hover:border-main-gray-400 outline-none bg-main-gray-700 text-main-slate-400 shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-main-indigo-200 transition ease-in duration-200'
             />
             <input
               type='time'
               name='timeValue'
               value={noteValues.timeValue}
               onChange={changeHandler}
-              className='w-56 p-3 text-main-black rounded-xl border-2 border-[#9a9da1c3] hover:border-gray-400 outline-none bg-gray-700 text-slate-400 shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              className='w-56 p-3 rounded-xl border-2 border-main-gray-400 hover:border-main-gray-400 outline-none bg-main-gray-700 text-main-slate-400 shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-main-indigo-200 transition ease-in duration-200'
             />
           </div>
         </div>
@@ -135,19 +139,19 @@ const NoteModal = ({
       {placeModal && (
         <div
           onClick={() => setModalState({ ...modalState, placeModal: false })}
-          className='w-screen h-screen z-50 bg-slate-700 bg-opacity-80 fixed inset-0 flex justify-center items-center'
+          className={modalClass}
         >
           <div className='flex flex-col' onClick={(e) => e.stopPropagation()}>
             <span
               value={placesPreview}
-              className='w-72 h-fit max-h-40 overflow-y-auto bg-gray-600 border-[#9a9da1c3] hover:border-gray-400 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'
+              className='w-72 h-fit max-h-40 overflow-y-auto bg-main-gray-600 border-main-gray-400 hover:border-main-gray-400 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-main-indigo-200 transition ease-in duration-200 scrollbar-thin scrollbar-thumb-main-gray-500 scrollbar-track-main-gray-700'
             >
               {placesPreview &&
                 placesPreview.map((place, index) => (
                   <div key={index} className='p-3  border-b-2 border-[#414d60]'>
                     <a
                       onClick={() => previewPosition(place)}
-                      className='cursor-pointer text-white'
+                      className='cursor-pointer text-main-white'
                     >
                       {place.name}
                     </a>
@@ -160,12 +164,12 @@ const NoteModal = ({
               value={placeSearchTerm}
               onChange={placeSearchHandler}
               placeholder='City search'
-              className='p-3 my-3 text-main-black rounded-xl border-2 border-[#9a9da1c3] hover:border-gray-400 outline-none bg-gray-700 text-white placeholder:text-slate-400 shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+              className='p-3 my-3 rounded-xl border-2 border-main-gray-400 hover:border-main-gray-400 outline-none bg-main-gray-700 text-main-white placeholder:text-main-slate-400 shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-main-indigo-200 transition ease-in duration-200'
             />
             <div
               className={
                 noteValues.placeValue &&
-                'w-72 h-fit p-3 rounded-xl border-[#9a9da1c3] hover:border-gray-400 bg-indigo-500 text-white'
+                'w-72 h-fit p-3 rounded-xl border-main-gray-400 hover:border-main-gray-400 bg-indigo-500 text-main-white'
               }
             >
               {noteValues.placeValue}
@@ -178,7 +182,7 @@ const NoteModal = ({
       {tagsModal && (
         <div
           onClick={() => setModalState({ ...modalState, tagsModal: false })}
-          className='w-screen h-screen z-50 bg-slate-700 bg-opacity-80 fixed inset-0 flex justify-center items-center'
+          className={modalClass}
         >
           <div className='flex flex-col' onClick={(e) => e.stopPropagation()}>
             <CreatableSelect

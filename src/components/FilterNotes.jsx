@@ -94,7 +94,7 @@ const FilterNotes = ({ notes, setFilteredNotes, ...props }) => {
           onChange={searchHandler}
           maxLength='30'
           placeholder='Note search...'
-          className='p-2 text-main-white placeholder:text-slate-400 rounded-xl outline-none shadow-lg bg-gray-700 border-2 border-[#9a9da1c3] hover:border-2 hover:border-[#a3a3a3] focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200'
+          className='p-2 text-main-white placeholder:text-main-slate-400 rounded-xl outline-none shadow-lg bg-main-gray-700 border-2 border-main-gray-400 hover:border-2 hover:border-[#a3a3a3] focus:ring-1 focus:ring-offset-1 focus:ring-main-indigo-200 transition ease-in duration-200'
         />
       </div>
 

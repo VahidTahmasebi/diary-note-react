@@ -12,7 +12,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <section className='w-full h-screen flex flex-col justify-center items-center overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-700'>
+    <section className='w-full h-screen flex flex-col justify-center items-center overflow-auto scrollbar-thin scrollbar-thumb-main-gray-500 scrollbar-track-main-gray-700'>
       {/* main logo */}
       <div>
         <img
@@ -31,7 +31,7 @@ const MainPage = () => {
       {/* get start button */}
       <div className='text-center'>
         <Link to='/new-note'>
-          <button className='py-4 px-4 mb-2 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'>
+          <button className='py-4 px-4 mb-2 rounded-full bg-primary-color hover:bg-primary-color-hover focus:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-indigo-200 transition ease-in duration-200 text-base font-semibold shadow-md outline-none'>
             Get Started
           </button>
         </Link>

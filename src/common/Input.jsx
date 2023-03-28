@@ -12,7 +12,7 @@ const Input = ({ label, name, formik, type = 'text' }) => {
         id={name}
         disabled
         {...formik.getFieldProps(name)}
-        className='w-full p-2 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-indigo-200 transition ease-in duration-200 cursor-not-allowed'
+        className='w-full p-2 text-main-black rounded-xl outline-none shadow-lg focus:ring-1 focus:ring-offset-1 focus:ring-main-indigo-200 transition ease-in duration-200 cursor-not-allowed'
       />
       <div className='h-4 pt-1'>
         {formik.errors[name] && formik.touched[name] && (

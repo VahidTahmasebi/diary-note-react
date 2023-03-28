@@ -12,7 +12,7 @@ const NoteItem = ({ ...note }) => {
     <>
       <Link to={`/note/${id}`} state={{ note }}>
         <li
-          className='h-20 flex my-3 pl-5 py-6 bg-gray-700 bg-opacity-80 bg-blend-multiply bg-cover bg-center rounded-xl shadow-lg hover:ring-1 hover:ring-offset-1 hover:ring-indigo-200 transition ease-in duration-200 overflow-x-auto overflow-y-hidden'
+          className='h-20 flex my-3 pl-5 py-6 bg-gray-700 bg-opacity-80 bg-blend-multiply bg-cover bg-center rounded-xl shadow-lg hover:ring-1 hover:ring-offset-1 hover:ring-main-indigo-200 transition ease-in duration-200 overflow-x-auto overflow-y-hidden'
           style={{
             backgroundImage: `url(${cover})`,
           }}
@@ -34,7 +34,7 @@ const NoteItem = ({ ...note }) => {
               viewBox='0 0 24 24'
               strokeWidth='1.5'
               stroke='currentColor'
-              className='w-6 h-6 hover:text-red-500 transition ease-in duration-200'
+              className='w-6 h-6 hover:text-main-red-500 transition ease-in duration-200'
             >
               <path
                 strokeLinecap='round'
