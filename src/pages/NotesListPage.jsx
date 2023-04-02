@@ -19,7 +19,14 @@ const NotesListPage = ({ ...props }) => {
     dispatch(getAsyncNotes());
   }, []);
 
-  if (loading) return <p>loading ...</p>;
+  // loading
+  if (loading)
+    return (
+      <div className='h-screen flex justify-center items-center'>
+        <div className=' w-1.5 h-1.5 rounded-full animate-spin duration-100 shadow-[24px_0_0_6px_#706fc7,-24px_0_0_6px_#706fc7]'></div>
+      </div>
+    );
+
   if (error) return <p>{error}</p>;
 
   return (
