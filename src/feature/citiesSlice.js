@@ -6,7 +6,9 @@ export const getAsyncCities = createAsyncThunk(
   'cities/getAsyncCities',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://localhost:9001/cities');
+      const response = await axios.get(
+        'https://api.npoint.io/e24d7208f89683197453/cities'
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue([], error);

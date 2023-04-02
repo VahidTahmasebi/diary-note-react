@@ -6,7 +6,10 @@ export const getAsyncNotes = createAsyncThunk(
   'notes/getAsyncNotes',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://localhost:9000/notes');
+      const response = await axios.get(
+        'https://my-json-server.typicode.com/VahidTahmasebi/sample-json-placeholder/notes'
+      );
+      
       return response.data;
     } catch (error) {
       return rejectWithValue([], error);
@@ -19,19 +22,23 @@ export const addAsyncNotes = createAsyncThunk(
   'notes/addAsyncNotes',
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:9000/notes', {
-        id: Date.now(),
-        createAt: new Date().toLocaleString(),
-        subject: payload.subject,
-        textarea: payload.textarea,
-        checklist: payload.checklist,
-        progress: payload.progress,
-        cover: payload.cover,
-        date: payload.date,
-        time: payload.time,
-        place: payload.place,
-        tags: payload.tags,
-      });
+      const response = await axios.post(
+        'https://my-json-server.typicode.com/VahidTahmasebi/sample-json-placeholder/notes',
+        {
+          id: Date.now(),
+          createAt: new Date().toLocaleString(),
+          subject: payload.subject,
+          textarea: payload.textarea,
+          checklist: payload.checklist,
+          progress: payload.progress,
+          cover: payload.cover,
+          date: payload.date,
+          time: payload.time,
+          place: payload.place,
+          tags: payload.tags,
+        }
+      );
+
       return response.data;
     } catch (error) {
       return rejectWithValue([], error);
@@ -44,7 +51,9 @@ export const deleteAsyncNote = createAsyncThunk(
   'notes/deleteAsyncNote',
   async (payload, { rejectWithValue }) => {
     try {
-      await axios.delete(`http://localhost:9000/notes/${payload.id}`);
+      await axios.delete(
+        `https://my-json-server.typicode.com/VahidTahmasebi/sample-json-placeholder/notes/${payload.id}`
+      );
 
       return { id: payload.id };
     } catch (error) {
@@ -59,7 +68,7 @@ export const getAsyncOneNote = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:9000/notes/${payload.id}`
+        `https://my-json-server.typicode.com/VahidTahmasebi/sample-json-placeholder/notes/${payload.id}`
       );
 
       return response.data;
@@ -75,7 +84,7 @@ export const editAsyncNote = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        `http://localhost:9000/notes/${payload.id}`,
+        `https://my-json-server.typicode.com/VahidTahmasebi/sample-json-placeholder/notes/${payload.id}`,
         {
           id: payload.id,
           createAt: payload.createAt,
