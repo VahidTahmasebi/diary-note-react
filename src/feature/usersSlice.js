@@ -7,7 +7,7 @@ export const getAsyncUsers = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        'https://api.npoint.io/6597f3f849a656be10e8/users'
+        'https://api.npoint.io/6bf9d0b4b8462a55955d/users'
       );
       return response.data;
     } catch (error) {
@@ -23,7 +23,7 @@ export const signupAsyncUsers = createAsyncThunk(
     try {
       localStorage.setItem('authState', JSON.stringify(payload));
       const response = await axios.post(
-        'https://api.npoint.io/6597f3f849a656be10e8/users',
+        'https://api.npoint.io/6bf9d0b4b8462a55955d/users',
         {
           id: payload.id,
           name: payload.name,
