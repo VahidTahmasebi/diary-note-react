@@ -10,7 +10,7 @@ import { TabTitle } from '../utils/TabTitle';
 
 const FormNotePage = ({ ...props }) => {
   TabTitle('New note - Diary Note');
-  
+
   const [noteValues, setNoteValues] = useState({
     subjectValue: '',
     textareaValue: '',
